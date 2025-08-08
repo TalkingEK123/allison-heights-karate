@@ -1,14 +1,23 @@
 {
-  "name": "vite_react_shadcn_ts",
+  "name": "allison-heights-karate",
+  "version": "1.0.0",
   "private": true,
-  "version": "0.0.0",
+  "description": "Allison Heights Karate — official website",
+  "author": "Youssef Ismail",
+  "license": "MIT",
   "type": "module",
+  "homepage": "https://yourdomain.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TalkingEK123/allison-heights-karate.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -38,7 +47,6 @@
     "@radix-ui/react-toast": "^1.2.1",
     "@radix-ui/react-toggle": "^1.1.0",
     "@radix-ui/react-toggle-group": "^1.1.0",
-    "@radix-ui/react-tooltip": "^1.1.4",
     "@tanstack/react-query": "^5.56.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -73,7 +81,6 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
-    "lovable-tagger": "^1.1.7",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.11",
     "typescript": "^5.5.3",

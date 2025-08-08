@@ -47,7 +47,11 @@ const Contact = () => {
               <CardTitle className="text-white text-2xl">Send Us a Message</CardTitle>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form
+                action="https://formspree.io/f/xyzppkve"  
+                method="POST"
+                className="space-y-6"
+              >
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="name" className="text-white">Full Name *</Label>
@@ -56,8 +60,6 @@ const Contact = () => {
                       name="name"
                       type="text"
                       required
-                      value={formData.name}
-                      onChange={handleChange}
                       className="bg-gray-700 border-gray-600 text-white"
                     />
                   </div>
@@ -68,8 +70,6 @@ const Contact = () => {
                       name="email"
                       type="email"
                       required
-                      value={formData.email}
-                      onChange={handleChange}
                       className="bg-gray-700 border-gray-600 text-white"
                     />
                   </div>
@@ -82,8 +82,6 @@ const Contact = () => {
                       id="phone"
                       name="phone"
                       type="tel"
-                      value={formData.phone}
-                      onChange={handleChange}
                       className="bg-gray-700 border-gray-600 text-white"
                     />
                   </div>
@@ -93,8 +91,6 @@ const Contact = () => {
                       id="age"
                       name="age"
                       type="number"
-                      value={formData.age}
-                      onChange={handleChange}
                       className="bg-gray-700 border-gray-600 text-white"
                     />
                   </div>
@@ -107,8 +103,6 @@ const Contact = () => {
                     name="message"
                     required
                     rows={5}
-                    value={formData.message}
-                    onChange={handleChange}
                     className="bg-gray-700 border-gray-600 text-white"
                     placeholder="Tell us about your karate goals, experience level, or any questions you have..."
                   />
@@ -119,6 +113,7 @@ const Contact = () => {
                 </Button>
               </form>
             </CardContent>
+
           </Card>
 
           {/* Contact Information */}
@@ -131,13 +126,13 @@ const Contact = () => {
                 <div>
                   <h4 className="font-semibold text-red-400 mb-2">Address:</h4>
                   <p className="text-gray-300">
-                    1234 Martial Arts Way<br />
-                    Allison Heights, CA 90210
+                    20 Karolie Rd, <br />
+                    Riverview, NB E1B 1R1
                   </p>
                 </div>
                 <div>
                   <h4 className="font-semibold text-red-400 mb-2">Phone:</h4>
-                  <p className="text-gray-300">(555) 123-KICK</p>
+                  <p className="text-gray-300">1(506) 295-3889</p>
                 </div>
                 <div>
                   <h4 className="font-semibold text-red-400 mb-2">Email:</h4>
@@ -153,16 +148,8 @@ const Contact = () => {
               <CardContent>
                 <div className="space-y-3">
                   <div className="flex justify-between">
-                    <span className="text-gray-300">Monday - Friday:</span>
-                    <span className="text-white">4:00 PM - 9:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-300">Saturday:</span>
-                    <span className="text-white">9:00 AM - 3:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-300">Sunday:</span>
-                    <span className="text-white">Closed</span>
+                    <span className="text-gray-300">Monday, Thursday, Friday :</span>
+                    <span className="text-white">6:00 PM - 8:15 PM</span>
                   </div>
                 </div>
               </CardContent>
@@ -175,7 +162,7 @@ const Contact = () => {
               <CardContent>
                 <p className="text-gray-300 mb-4">
                   New students can try their first class for FREE! Come experience our training 
-                  environment and meet our instructors.
+                  environment and meet our team.
                 </p>
                 <ul className="space-y-2 text-gray-300">
                   <li className="flex items-center">
@@ -188,7 +175,7 @@ const Contact = () => {
                   </li>
                   <li className="flex items-center">
                     <span className="w-2 h-2 bg-red-500 rounded-full mr-3"></span>
-                    Arrive 15 minutes early
+                    Arrive 10 minutes early
                   </li>
                 </ul>
               </CardContent>
@@ -196,12 +183,24 @@ const Contact = () => {
 
             {/* Map Placeholder */}
             <Card className="bg-gray-800 border-gray-700">
+              <CardHeader>
+                <CardTitle className="text-white">Our Location</CardTitle>
+              </CardHeader>
               <CardContent className="p-0">
-                <div className="h-64 bg-gray-700 rounded-lg flex items-center justify-center">
-                  <p className="text-gray-400">Interactive Map Coming Soon</p>
-                </div>
+                <iframe
+                  title="Allison Heights Karate Location"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11061.47373741081!2d-64.7999!3d46.0529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ca0b9a661ffdd23%3A0x6a4b45f9b9a4f6e2!2s20%20Karolie%20Rd%2C%20Riverview%2C%20NB%20E1B%201R1!5e0!3m2!1sen!2sca!4v1693320011100!5m2!1sen!2sca"
+                  width="100%"
+                  height="300"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="rounded-b-lg"
+                ></iframe>
               </CardContent>
             </Card>
+
           </div>
         </div>
       </div>

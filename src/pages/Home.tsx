@@ -26,7 +26,7 @@ const Home = () => {
             <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white">
               <Link to="/classes">Start Training</Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-gray-900">
+            <Button asChild variant="outline" size="lg" className="border-white text-gray-900 hover:bg-gray-300 hover:text-gray-900">
               <Link to="/about">Learn More</Link>
             </Button>
           </div>
@@ -64,7 +64,7 @@ const Home = () => {
                 </div>
                 <h3 className="text-xl font-bold mb-4 text-white">Competition</h3>
                 <p className="text-gray-300">
-                  Training champions for local, regional, and national tournaments.
+                  Training champions for local, regional, national, and international tournaments.
                 </p>
               </CardContent>
             </Card>
@@ -92,10 +92,10 @@ const Home = () => {
             Join our community of martial artists and discover your potential.
           </p>
           <div className="space-x-4">
-            <Button asChild size="lg" variant="secondary" className="bg-white text-red-600 hover:bg-gray-100">
+            <Button asChild size="lg" variant="secondary" className="bg-white text-red-600 hover:bg-gray-300">
               <Link to="/contact">Contact Us</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-red-600">
+            <Button asChild size="lg" variant="outline" className="bg-white text-red-600 hover:bg-gray-300 hover:text-red-600">
               <Link to="/classes">View Classes</Link>
             </Button>
           </div>
