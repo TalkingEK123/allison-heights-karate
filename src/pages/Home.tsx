@@ -129,7 +129,7 @@ const EVENTS: Event[] = [
  *  HERO: Slideshow with dark tint
  * ======================================================= */
 const HERO_IMAGES = [
-  "/images/hero/action-1.jpg",
+  "public/images/action-1.jpg",
   "/images/hero/action-2.jpg",
   "/images/hero/action-3.jpg",
 ]; // replace with your real photos (wide crops look best)
