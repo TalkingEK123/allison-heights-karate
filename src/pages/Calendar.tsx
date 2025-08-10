@@ -1,424 +1,404 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Calendar as CalendarComponent } from "@/components/ui/calendar";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { Calendar as DayPicker } from "@/components/ui/calendar";
+import { enCA } from "date-fns/locale";
+
+/** ===================== Config =====================
+ * Set the calendar week start here:
+ * 0 = Sunday (common for Canada), 1 = Monday (ISO 8601)
+ */
+const WEEK_START: 0 | 1 = 0;
+
+/** ===================== Types & Data ===================== */
+type EventType = "Training" | "Competition" | "Testing" | "Seminar" | "Special";
 
 type Event = {
-  date: string;
+  id: string;
   title: string;
-  time: string;
+  type: EventType;
+  start: string; // ISO date (YYYY-MM-DD) or ISO datetime
+  end?: string;  // ISO date for multi-day spans
+  time: string;  // human-friendly time
   location: string;
-  type: string;
+  url?: string;  // optional registration/info link
 };
 
-const Calendar = () => {
-  const [date, setDate] = useState<Date | undefined>(new Date());
-  const [events] = useState<Event[]>([
-    {
-      date: "September 14, 2025",
-      title: "Karate New Brunswick Open Team Training",
-      time: "9:30 AM - 3:00 PM",
-      location: "Kv Karate club",
-      type: "Training",
-    },
-    {
-      date: "September 20, 2025",
-      title: "Karate New Brunswick Grand Prix",
-      time: "9:00 AM - 4:00 PM",
-      location: "Tracadie",
-      type: "Competition",
-    },
-    {
-      date: "September 14, 2025",
-      title: "Karate New  Brunswick open training",
-      time: "9:30 AM - 5:00 PM",
-      location: "Saint John\, NB\, Canada",
-      type: "Training",
-    },
-    {
-      date: "September 20, 2025",
-      title: "Karate New  Brunswick Grand Prix",
-      time: "9:30 AM - 5:00 PM",
-      location: "Tracadie\, NB\, Canada",
-      type: "Competition",
-    },
-    {
-      date: "September 21, 2025",
-      title: "Karate New  Brunswick Clinic",
-      time: "9:00 AM - 1:00 PM",
-      location: "Tracadie\, NB\, Canada",
-      type: "Training",
-    },
-    {
-      date: "September 27, 2025",
-      title: "Karate New  Brunswick Fitness test CSIA",
-      time: "1:00 PM - 5:00 PM",
-      location: "Fredericton\, NB\, Canada",
-      type: "Testing",
-    },
-    {
-      date: "October 3 - 5, 2025",
-      title: "Karate Nova Scotia Kumite clinic (Yevhen)",
-      time: "All day",
-      location: "Halifax\, NS\, Canada",
-      type: "Seminar",
-    },
-    {
-      date: "October 12, 2025",
-      title: "Karate New  Brunswick open training",
-      time: "9:30 AM - 3:00 PM",
-      location: "Saint John\, NB\, Canada",
-      type: "Training",
-    },
-    /*{
-      date: "October 25, 2025",
-      title: "Clinic/Grading (Denis Beaudoin)",
-      time: "10:00 AM - 5:00 PM",
-      location: "TBD",
-      type: "Training",
-    },*/
-    {
-      date: "November 1, 2025",
-      title: "Atlantic Championship",
-      time: "All day",
-      location: "Moncton\, NB\, Canada",
-      type: "Competition",
-    },
-    {
-      date: "November 2, 2025",
-      title: "Karate Canada Regional camp",
-      time: "9:30 PM - 4:00 PM",
-      location: "Moncton\, NB\, Canada",
-      type: "Special Event",
-    },
-    {
-      date: "November 16, 2025",
-      title: "Karate New  Brunswick open training",
-      time: "9:30 AM - 3:00 PM",
-      location: "Saint John\, NB\, Canada",
-      type: "Training",
-    },
-    {
-      date: "November 22, 2025",
-      title: "Karate Nova Scotia Grand Prix",
-      time: "9:30 AM - 4:30 PM",
-      location: "Spryfield\, Halifax\, NS\, Canada",
-      type: "Competition",
-    },
-    {
-      date: "December 14, 2025",
-      title: "Karate New  Brunswick Open training",
-      time: "9:30 AM - 3:00 PM",
-      location: "Saint John",
-      type: "Training",
-    },
-    {
-      date: "January 18, 2026",
-      title: "Karate New  Brunswick open training",
-      time: "9:30 AM - 3:00 PM",
-      location: "Saint John\, NB\, Canada",
-      type: "Training",
-    },
-    {
-      date: "February 7, 2026",
-      title: "Karate New  Brunswick Grand Prix",
-      time: "9:30 AM - 5:00 PM",
-      location: "Moncton\, NB\, Canada",
-      type: "Competition",
-    },
-    {
-      date: "February 8, 2026",
-      title: "Karate New  Brunswick clinic",
-      time: "9:00 AM - 1:00 PM",
-      location: "TBD",
-      type: "Training",
-    },
-    {
-      date: "March 8, 2026",
-      title: "Karate New  Brunswick closed training",
-      time: "9:30 AM - 3:00 PM",
-      location: "Saint John\, NB\, Canada",
-      type: "Training",
-    },
-    {
-      date: "March 22, 2026",
-      title: "Karate New  Brunswick closed training",
-      time: "9:30 AM - 3:00 PM",
-      location: "Saint John\, NB\, Canada",
-      type: "Training",
-    },
-    {
-      date: "April 5, 2026",
-      title: "Karate New  Brunswick closed training",
-      time: "9:30 AM - 3:00 PM",
-      location: "Saint John\, NB\, Canada",
-      type: "Training",
-    },
-    {
-      date: "April 19, 2026",
-      title: "Karate New  Brunswick closed training",
-      time: "9:30 AM - 3:00 PM",
-      location: "Saint John\, NB\, Canada",
-      type: "Training",
-    },
-    {
-      date: "April 26, 2026",
-      title: "Karate New  Brunswick closed training",
-      time: "9:30 AM - 3:00 PM",
-      location: "Saint John\, NB\, Canada",
-      type: "Training",
-    },
-    {
-      date: "May 3, 2026",
-      title: "Karate New  Brunswick closed training",
-      time: "9:30 AM - 3:00 PM",
-      location: "Saint John\, NB\, Canada",
-      type: "Training",
-    },
-  ]);
+/**
+ * 🔧 EDIT THIS ARRAY to add/remove events.
+ * Dates: "YYYY-MM-DD". Add `end` for multi‑day spans. Add `url` for registration.
+ */
+const EVENTS: Event[] = [
+  { id: "knb-open-2025-09-14", title: "Karate New Brunswick Open Team Training", type: "Training", start: "2025-09-14", time: "9:30 AM – 3:00 PM", location: "KV Karate Club (Saint John, NB)" },
+  { id: "knb-gp-2025-09-20", title: "Karate New Brunswick Grand Prix", type: "Competition", start: "2025-09-20", time: "9:00 AM – 4:00 PM", location: "Tracadie, NB" },
+  { id: "knb-open-2-2025-09-14", title: "Karate New Brunswick Open Training", type: "Training", start: "2025-09-14", time: "9:30 AM – 5:00 PM", location: "Saint John, NB" },
+  { id: "knb-gp-2-2025-09-20", title: "Karate New Brunswick Grand Prix", type: "Competition", start: "2025-09-20", time: "9:30 AM – 5:00 PM", location: "Tracadie, NB" },
+  { id: "knb-clinic-2025-09-21", title: "Karate New Brunswick Clinic", type: "Training", start: "2025-09-21", time: "9:00 AM – 1:00 PM", location: "Tracadie, NB" },
+  { id: "knb-fitness-2025-09-27", title: "KNB Fitness Test (CSIA)", type: "Testing", start: "2025-09-27", time: "1:00 PM – 5:00 PM", location: "Fredericton, NB" },
+  { id: "nss-kumite-2025-10-03", title: "Nova Scotia Kumite Clinic (Yevhen)", type: "Seminar", start: "2025-10-03", end: "2025-10-05", time: "All day", location: "Halifax, NS", url: "https://example.com/register" },
+  { id: "knb-open-2025-10-12", title: "Karate New Brunswick Open Training", type: "Training", start: "2025-10-12", time: "9:30 AM – 3:00 PM", location: "Saint John, NB" },
+  { id: "atlantic-champs-2025-11-01", title: "Atlantic Championship", type: "Competition", start: "2025-11-01", time: "All day", location: "Moncton, NB", url: "https://example.com/atlantic" },
+  { id: "kc-regional-2025-11-02", title: "Karate Canada Regional Camp", type: "Special", start: "2025-11-02", time: "9:30 AM – 4:00 PM", location: "Moncton, NB" },
+  { id: "knb-open-2025-11-16", title: "Karate New Brunswick Open Training", type: "Training", start: "2025-11-16", time: "9:30 AM – 3:00 PM", location: "Saint John, NB" },
+  { id: "ns-gp-2025-11-22", title: "Karate Nova Scotia Grand Prix", type: "Competition", start: "2025-11-22", time: "9:30 AM – 4:30 PM", location: "Spryfield, Halifax, NS" },
+  { id: "knb-open-2025-12-14", title: "Karate New Brunswick Open Training", type: "Training", start: "2025-12-14", time: "9:30 AM – 3:00 PM", location: "Saint John, NB" },
+  { id: "knb-open-2026-01-18", title: "Karate New Brunswick Open Training", type: "Training", start: "2026-01-18", time: "9:30 AM – 3:00 PM", location: "Saint John, NB" },
+  { id: "knb-gp-2026-02-07", title: "Karate New Brunswick Grand Prix", type: "Competition", start: "2026-02-07", time: "9:30 AM – 5:00 PM", location: "Moncton, NB" },
+  { id: "knb-clinic-2026-02-08", title: "Karate New Brunswick Clinic", type: "Training", start: "2026-02-08", time: "9:00 AM – 1:00 PM", location: "TBD" },
+  { id: "knb-closed-2026-03-08", title: "Karate New Brunswick Closed Training", type: "Training", start: "2026-03-08", time: "9:30 AM – 3:00 PM", location: "Saint John, NB" },
+  { id: "knb-closed-2026-03-22", title: "Karate New Brunswick Closed Training", type: "Training", start: "2026-03-22", time: "9:30 AM – 3:00 PM", location: "Saint John, NB" },
+  { id: "knb-closed-2026-04-05", title: "Karate New Brunswick Closed Training", type: "Training", start: "2026-04-05", time: "9:30 AM – 3:00 PM", location: "Saint John, NB" },
+  { id: "knb-closed-2026-04-19", title: "Karate New Brunswick Closed Training", type: "Training", start: "2026-04-19", time: "9:30 AM – 3:00 PM", location: "Saint John, NB" },
+  { id: "knb-closed-2026-04-26", title: "Karate New Brunswick Closed Training", type: "Training", start: "2026-04-26", time: "9:30 AM – 3:00 PM", location: "Saint John, NB" },
+  { id: "knb-closed-2026-05-03", title: "Karate New Brunswick Closed Training", type: "Training", start: "2026-05-03", time: "9:30 AM – 3:00 PM", location: "Saint John, NB" },
+];
 
-  const [showModal, setShowModal] = useState(false);
-  const [selectedDateEvents, setSelectedDateEvents] = useState<Event[]>([]);
-  const eventRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+/** High‑contrast colors on dark background */
+const TYPE_COLOR: Record<EventType, { chip: string; dot: string; label: string }> = {
+  Competition: { chip: "bg-[#D7263D] text-white", dot: "bg-[#D7263D]", label: "Competition" }, // crimson
+  Training:    { chip: "bg-[#22C55E] text-black", dot: "bg-[#22C55E]", label: "Training" },    // green
+  Testing:     { chip: "bg-[#0072CE] text-white", dot: "bg-[#0072CE]", label: "Testing" },     // bright blue
+  Seminar:     { chip: "bg-[#CFAE53] text-black", dot: "bg-[#CFAE53]", label: "Seminar" },     // gold
+  Special:     { chip: "bg-[#A855F7] text-white", dot: "bg-[#A855F7]", label: "Special" },     // violet
+};
 
-  const selectedStr = date?.toDateString();
+/** ===================== Utils ===================== */
+const ymd = (d: string | Date) => {
+  const date = typeof d === "string" ? new Date(d) : d;
+  const yyyy = date.getFullYear();
+  const mm = `${date.getMonth() + 1}`.padStart(2, "0");
+  const dd = `${date.getDate()}`.padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+};
 
-  const getEventTypeColor = (type: string) => {
-    switch (type) {
-      case "Competition":
-        return "bg-red-600";
-      case "Testing":
-        return "bg-blue-600";
-      case "Seminar":
-        return "bg-green-600";
-      case "Special Event":
-        return "bg-purple-600";
-      case "Training":
-        return "bg-orange-600";
-      default:
-        return "bg-gray-600";
+const enumerateDates = (startISO: string, endISO?: string) => {
+  const out: string[] = [];
+  const start = new Date(startISO);
+  const end = endISO ? new Date(endISO) : new Date(startISO);
+  const cur = new Date(start);
+  while (cur <= end) {
+    out.push(ymd(cur));
+    cur.setDate(cur.getDate() + 1);
+  }
+  return out;
+};
+
+/** ===================== Component ===================== */
+export default function Calendar() {
+  const [selected, setSelected] = useState<Date | undefined>(new Date());
+  const [filters, setFilters] = useState<Record<EventType, boolean>>({
+    Competition: true,
+    Training: true,
+    Testing: true,
+    Seminar: true,
+    Special: true,
+  });
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  // Map day -> events (handles multi-day)
+  const eventsByDay = useMemo(() => {
+    const map = new Map<string, Event[]>();
+    EVENTS.forEach((e) => {
+      enumerateDates(e.start, e.end).forEach((d) => {
+        const arr = map.get(d) ?? [];
+        arr.push(e);
+        map.set(d, arr);
+      });
+    });
+    map.forEach((arr) =>
+      arr.sort((a, b) => a.type.localeCompare(b.type) || a.title.localeCompare(b.title))
+    );
+    return map;
+  }, []);
+
+  // Filtered upcoming list
+  const upcoming = useMemo(() => {
+    const today = new Date(ymd(new Date())); // strip time
+    return [...EVENTS]
+      .filter((e) => new Date(e.end ?? e.start) >= today)
+      .filter((e) => filters[e.type])
+      .sort((a, b) => +new Date(a.start) - +new Date(b.start));
+  }, [filters]);
+
+  // Refs for jumping the list to the selected day
+  const listRef = useRef<HTMLDivElement | null>(null);
+  const dayRefs = useRef<Record<string, HTMLDivElement | null>>({});
+
+  useEffect(() => {
+    const key = selected ? ymd(selected) : undefined;
+    if (!key) return;
+    const node = dayRefs.current[key];
+    if (node) node.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [selected]);
+
+  // Deep-link support (scroll on initial load only)
+  useEffect(() => {
+    const id = window.location.hash.replace("#", "");
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, []);
+
+  // Day has any event?
+  const hasAnyEvent = (day: Date) => (eventsByDay.get(ymd(day)) ?? []).length > 0;
+
+  // Larger Day cells + colored dots inside the calendar
+  const DayContent = (props: any) => {
+    const day: Date = props.date;
+    const key = ymd(day);
+    const evts = (eventsByDay.get(key) ?? []).slice(0, 4);
+    return (
+      <div className="relative flex flex-col items-center leading-none">
+        <span className="font-semibold">{day.getDate()}</span>
+        {evts.length > 0 && (
+          <span className="mt-1 flex gap-1">
+            {evts.map((e) => (
+              <span
+                key={e.id}
+                className={`ahk-dot inline-block size-2 md:size-2.5 rounded-full ring-1 ring-black/60 ${TYPE_COLOR[e.type].dot}`}
+                aria-hidden="true"
+                title={e.title}
+              />
+            ))}
+          </span>
+        )}
+      </div>
+    );
+  };
+
+  // Copy shareable link to clipboard (does NOT scroll the page)
+  const copyLink = async (id: string) => {
+    const url = `${window.location.origin}${window.location.pathname}#${id}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopiedId(id);
+      setTimeout(() => setCopiedId(null), 1200);
+    } catch {
+      setCopiedId(null);
     }
   };
 
-  const eventMap = new Map(
-    events.map((event) => [new Date(event.date).toDateString(), event])
+  // Locale with explicit week start (prevents header/day misalignment)
+  const locale = useMemo(
+    () => ({ ...enCA, options: { ...enCA.options, weekStartsOn: WEEK_START } }),
+    []
   );
 
-  const sortedEvents = [...events].sort((a, b) => {
-    const aMatch = new Date(a.date).toDateString() === selectedStr;
-    const bMatch = new Date(b.date).toDateString() === selectedStr;
-    return (bMatch ? 1 : 0) - (aMatch ? 1 : 0);
-  });
-
-  const modifiers = {
-    competitionDay: (day: Date) =>
-      eventMap.get(day.toDateString())?.type === "Competition",
-    testingDay: (day: Date) =>
-      eventMap.get(day.toDateString())?.type === "Testing",
-    seminarDay: (day: Date) =>
-      eventMap.get(day.toDateString())?.type === "Seminar",
-    specialDay: (day: Date) =>
-      eventMap.get(day.toDateString())?.type === "Special Event",
-    Training: (day: Date) =>
-      eventMap.get(day.toDateString())?.type === "Training",
-  };
-
-  const modifiersClassNames = {
-    selected: "rdp-day_selected",
-    today: "border border-white",
-    competitionDay: "dot-indicator-red",
-    testingDay: "dot-indicator-blue",
-    seminarDay: "dot-indicator-green",
-    specialDay: "dot-indicator-purple",
-    Training: "dot-indicator-orange",
-  };
-
-  const handleDateSelect = (d: Date | undefined) => {
-    setDate(d);
-    const key = d?.toDateString();
-    const match = events.filter((e) => new Date(e.date).toDateString() === key);
-    setSelectedDateEvents(match);
-    if (match.length > 0) {
-      const scrollKey = `${match[0].title}-${match[0].date}`;
-      const el = eventRefs.current[scrollKey];
-      el?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
-
   return (
-    <div className="min-h-screen py-20">
-      <div className="max-w-6xl mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold mb-4 text-white">Calendar</h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Stay up to date with upcoming tournaments, belt testing, seminars,
-            and special events at Allison Heights Karate.
+    <main id="main" className="bg-brand-900 text-primary">
+      {/* Ensure selected-day dots stay visible */}
+      <style jsx global>{`
+        /* Keep event dots readable when a day is selected or today */
+        .rdp-day_selected .ahk-dot,
+        .rdp-day_today .ahk-dot {
+          box-shadow:
+            inset 0 0 0 2px rgba(255, 255, 255, 0.85),
+            0 0 0 1px rgba(0, 0, 0, 0.6);
+        }
+        /* Slightly stronger weekday/header contrast on dark */
+        .rdp-head_cell { color: rgba(255, 255, 255, 0.92); }
+      `}</style>
+
+      {/* Header */}
+      <header className="section-y border-b border-steel/40">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 text-center">
+          <p className="text-white/80 uppercase tracking-[0.2em] text-xs md:text-sm">Events</p>
+          <h1 className="mt-2 text-3xl md:text-5xl font-bold uppercase tracking-[0.02em]">Calendar</h1>
+          <p className="mt-4 max-w-3xl mx-auto text-white/90">
+            All our upcoming karate events in one place.
           </p>
         </div>
+      </header>
 
-        <div className="grid lg:grid-cols-2 gap-8">
-          {/* Calendar Widget */}
-          <div className="flex justify-center">
-            <Card className="bg-gray-600 border-gray-700 p-2">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-center text-white text-xl">
-                  Event Calendar
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="flex flex-col items-center space-y-2">
-                <CalendarComponent
-                  mode="single"
-                  selected={date}
-                  onSelect={handleDateSelect}
-                  className="rounded-md border-gray-600"
-                  modifiers={modifiers}
-                  modifiersClassNames={modifiersClassNames}
-                />
-                <button
-                  onClick={() => setShowModal(true)}
-                  className="text-sm mt-1 text-blue-400 hover:underline"
-                >
-                  View Events on This Day
-                </button>
-              </CardContent>
-            </Card>
+      {/* Calendar + List */}
+      <section className="py-10 md:py-12">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 grid gap-8 lg:grid-cols-[700px,1fr]">
+          {/* LEFT: Larger Calendar + Filters */}
+          <div className="rounded-lg border border-steel/40 bg-black/30 p-5 md:p-6">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl md:text-2xl font-bold uppercase tracking-[0.02em]">Event Calendar</h2>
+              <Link to="/contact" className="btn-primary" aria-label="Contact us about events">
+                Ask a Question
+              </Link>
+            </div>
+
+            <div className="mt-4">
+              <DayPicker
+                mode="single"
+                selected={selected}
+                onSelect={setSelected}
+                showOutsideDays={false}
+                locale={locale}
+                className="rounded-md"
+                /* Bigger & readable on dark; selection uses outline instead of a solid fill
+                   so dots + numbers remain visible with AA contrast */
+                classNames={{
+                  months: "flex flex-col sm:flex-row gap-4",
+                  caption_label: "text-white text-2xl md:text-3xl font-semibold",
+                  nav_button: "text-white/90 hover:text-white",
+                  head_row: "grid grid-cols-7 gap-1",
+                  head_cell: "text-white/90 font-semibold text-sm md:text-base",
+                  table: "border-separate border-spacing-1",
+                  row: "grid grid-cols-7 gap-1",
+                  cell: "p-0",
+                  day: "h-16 w-16 md:h-20 md:w-20 text-base md:text-lg text-white/90 hover:bg-white/5 rounded-md focus:outline-none relative",
+                  day_outside: "opacity-60",
+                  day_selected:
+                    "ring-2 ring-white/70 bg-white/10 text-white rounded-md", // neutral selection
+                  day_today:
+                    "ring-1 ring-white/50 bg-white/[0.04] rounded-md",
+                }}
+                components={{ DayContent }}
+                modifiers={{ hasAnyEvent }}
+                modifiersClassNames={{
+                  hasAnyEvent: "ring-0 hover:ring-1 hover:ring-steel/40",
+                  selected: "ahk-selected",
+                }}
+              />
+            </div>
+
+            {/* Legend / Filters */}
+            <div className="mt-6">
+              <p className="text-white/80 mb-2 uppercase tracking-[0.2em]">Filter</p>
+              <div className="flex flex-wrap gap-2">
+                {(Object.keys(TYPE_COLOR) as EventType[]).map((t) => (
+                  <button
+                    key={t}
+                    onClick={() => setFilters((f) => ({ ...f, [t]: !f[t] }))}
+                    className={`px-3 py-1 rounded-md text-xs font-semibold border border-steel/40 transition
+                      ${filters[t] ? "opacity-100" : "opacity-50"}
+                    `}
+                    aria-pressed={filters[t]}
+                  >
+                    <span className={`inline-block size-2 rounded-full mr-2 align-middle ${TYPE_COLOR[t].dot}`} />
+                    {TYPE_COLOR[t].label}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
 
-          {/* Upcoming Events */}
-          <div>
-            <h2 className="text-3xl font-bold mb-6 text-white">Upcoming Events</h2>
-            <div className="space-y-4">
-              {sortedEvents.map((event, index) => {
-                const refKey = `${event.title}-${event.date}`;
-                return (
-                  <div key={index} ref={(el) => (eventRefs.current[refKey] = el)}>
-                    <Card className="bg-gray-800 border-gray-700 hover:border-red-600 transition">
-                      <CardContent className="p-5">
-                        <div className="flex items-start justify-between mb-3">
-                          <div>
-                            <h3 className="text-xl font-bold text-white mb-1">
-                              {event.title}
-                            </h3>
-                            <p className="text-red-400 font-medium">{event.date}</p>
-                          </div>
-                          <span
-                            className={`px-3 py-1 rounded-full text-white text-sm font-medium ${getEventTypeColor(
-                              event.type
-                            )}`}
-                          >
-                            {event.type}
-                          </span>
-                        </div>
-                        <div className="space-y-1 text-gray-300 text-sm">
-                          <div className="flex">
-                            <span className="font-medium mr-2">Time:</span>
-                            <span>{event.time}</span>
-                          </div>
-                          <div className="flex">
-                            <span className="font-medium mr-2">Location:</span>
-                            <span>{event.location}</span>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
+          {/* RIGHT: Upcoming list */}
+          <div className="rounded-lg border border-steel/40 bg-black/20 p-0">
+            <div ref={listRef} className="max-h-[76vh] overflow-y-auto scroll-smooth">
+              {groupByMonth(upcoming).map(({ monthLabel, items }) => (
+                <div key={monthLabel}>
+                  <div className="sticky top-0 z-10 bg-brand-900/95 backdrop-blur supports-[backdrop-filter]:bg-brand-900/70 border-b border-steel/40 px-4 md:px-6 py-3">
+                    <h3 className="text-sm md:text-base font-semibold uppercase tracking-[0.1em]">
+                      {monthLabel}
+                    </h3>
                   </div>
-                );
-              })}
+                  <div className="p-4 md:p-6 space-y-6">
+                    {groupByDay(items).map(({ dayKey, dayLabel, events }) => (
+                      <div key={dayKey} ref={(el) => (dayRefs.current[dayKey] = el)}>
+                        <div className="flex items-center gap-3 mb-3">
+                          <span className="text-lg font-bold text-white">{dayLabel}</span>
+                          <div className="h-px flex-1 bg-steel/40" />
+                        </div>
+                        <ul className="space-y-3">
+                          {events.map((e) => (
+                            <li key={e.id} id={e.id}>
+                              <article className="rounded-lg border border-steel/40 bg-brand-900/70 p-4 transition-transform duration-200 hover:scale-[1.01]">
+                                <div className="flex items-start justify-between gap-4">
+                                  <div>
+                                    <h4 className="font-bold uppercase tracking-[0.02em] text-white">{e.title}</h4>
+                                    <p className="text-white/90 mt-1 text-sm">{formatDateRange(e)}</p>
+                                    <p className="text-white/90 text-sm">{e.time}</p>
+                                    <p className="text-white/90 text-sm">{e.location}</p>
+                                  </div>
+                                  <span className={`px-2 py-1 rounded text-xs font-semibold ${TYPE_COLOR[e.type].chip}`}>
+                                    {TYPE_COLOR[e.type].label}
+                                  </span>
+                                </div>
+                                <div className="mt-3 flex gap-2">
+                                  {e.url && (
+                                    <a
+                                      href={e.url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="btn-primary !px-3 !py-1 text-xs"
+                                      aria-label={`Open registration for ${e.title}`}
+                                    >
+                                      Register
+                                    </a>
+                                  )}
+                                  <button
+                                    onClick={() => copyLink(e.id)}
+                                    className="inline-flex items-center rounded-md border border-steel/40 px-2 py-1 text-xs text-white/90 hover:text-white"
+                                    aria-live="polite"
+                                  >
+                                    {copiedId === e.id ? "Copied!" : "Share Link"}
+                                  </button>
+                                </div>
+                              </article>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+              {upcoming.length === 0 && (
+                <div className="p-6">
+                  <p className="text-white/80">No upcoming events match your filters.</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Modal */}
-      {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-gray-800 p-6 rounded shadow-lg w-full max-w-md text-white relative">
-            <h3 className="text-xl font-bold mb-4">Events on {selectedStr}</h3>
-            {selectedDateEvents.length > 0 ? (
-              <ul className="space-y-3">
-                {selectedDateEvents.map((event, i) => (
-                  <li key={i}>
-                    <strong>{event.title}</strong> — {event.time} @ {event.location}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>No events on this day.</p>
-            )}
-            <button
-              className="absolute top-2 right-2 text-gray-400 hover:text-white"
-              onClick={() => setShowModal(false)}
-            >
-              ✕
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Dot and calendar styles */}
-      <style>{`
-        .rdp-day {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          font-size: 1rem;
-          font-weight: 600;
-          color: #f1f5f9;
-          transition: background-color 0.2s;
-          padding: 0.3rem;
-        }
-
-        .rdp-day:hover {
-          background-color: rgba(255, 255, 255, 0.05);
-          border-radius: 0.375rem;
-        }
-
-        .rdp-day_selected {
-          background-color: #ef4444 !important;
-          color: white !important;
-          border-radius: 8px;
-        }
-
-        .dot-indicator-red::after,
-        .dot-indicator-blue::after,
-        .dot-indicator-green::after,
-        .dot-indicator-purple::after,
-        .dot-indicator-orange::after {
-          content: "";
-          display: block;
-          width: 6px;
-          height: 6px;
-          border-radius: 9999px;
-          margin-top: 4px;
-        }
-
-        .dot-indicator-red::after {
-          background-color: #dc2626;
-        }
-
-        .dot-indicator-blue::after {
-          background-color: #2563eb;
-        }
-
-        .dot-indicator-green::after {
-          background-color: #16a34a;
-        }
-
-        .dot-indicator-purple::after {
-          background-color: #9333ea;
-        }
-        .dot-indicator-orange::after {
-          background-color: #db5d23ff;
-        }
-      `}</style>
-    </div>
+      </section>
+    </main>
   );
-};
+}
 
-export default Calendar;
+/** ===================== Pure helpers ===================== */
+function groupByMonth(items: Event[]) {
+  const out: { monthLabel: string; items: Event[] }[] = [];
+  items.forEach((e) => {
+    const d = new Date(e.start);
+    const label = d.toLocaleString(undefined, { month: "long", year: "numeric" });
+    const bucket = out.find((b) => b.monthLabel === label);
+    if (bucket) bucket.items.push(e);
+    else out.push({ monthLabel: label, items: [e] });
+  });
+  return out;
+}
+
+function groupByDay(items: Event[]) {
+  const map = new Map<string, Event[]>();
+  items.forEach((e) => {
+    const key = ymd(e.start);
+    const arr = map.get(key) ?? [];
+    arr.push(e);
+    map.set(key, arr);
+  });
+  return [...map.entries()]
+    .sort((a, b) => (a[0] < b[0] ? -1 : 1))
+    .map(([dayKey, events]) => ({
+      dayKey,
+      dayLabel: new Date(dayKey).toLocaleDateString(undefined, {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+      }),
+      events,
+    }));
+}
+
+function formatDateRange(e: Event) {
+  const s = new Date(e.start);
+  if (!e.end) {
+    return s.toLocaleDateString(undefined, {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+  }
+  const en = new Date(e.end);
+  const sameMonth = s.getMonth() === en.getMonth() && s.getFullYear() === en.getFullYear();
+  if (sameMonth) {
+    return `${s.toLocaleDateString(undefined, { month: "short", day: "numeric" })}–${en.toLocaleDateString(undefined, { day: "numeric", year: "numeric" })}`;
+  }
+  return `${s.toLocaleDateString(undefined, { month: "short", day: "numeric" })} – ${en.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}`;
+}

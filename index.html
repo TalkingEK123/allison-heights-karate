@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -21,7 +21,8 @@
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#0f172a" />
+    <!-- Brand charcoal -->
+    <meta name="theme-color" content="#0B0B0D" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -43,6 +44,7 @@
     />
     <meta name="twitter:image" content="/og-image.jpg" />
 
+    <!-- LocalBusiness / SportsActivityLocation schema -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -61,6 +63,23 @@
         "areaServed": ["Moncton", "Riverview", "Dieppe"]
       }
     </script>
+
+    <!-- Fonts: Montserrat (headers) + Open Sans (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Expose CSS vars so Tailwind classes can use them -->
+    <style>
+      :root {
+        --font-montserrat: "Montserrat", system-ui, -apple-system, Segoe UI,
+          Roboto, Arial, sans-serif;
+        --font-open-sans: "Open Sans", system-ui, -apple-system, Segoe UI,
+          Roboto, Arial, sans-serif;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

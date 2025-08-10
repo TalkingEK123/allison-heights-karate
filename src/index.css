@@ -2,11 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* All colors HSL — matching the premium dark sports vibe */
 
 @layer base {
+  /* Light theme (kept for completeness; not our default) */
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -39,58 +38,90 @@ All colors MUST be HSL.
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* === Brand extras (for Tailwind tokens) === */
+    --brand-900: 240 8.3% 4.7%;   /* #0B0B0D */
+    --brand-800: 240 9.7% 6.1%;   /* #0E0E11 */
+    --brand-700: 225 10% 7.8%;    /* #121316 */
+
+    --text-primary: 0 0% 96.1%;   /* #F5F5F5 */
+    --text-secondary: 240 3.3% 70%; /* #B0B0B5 */
+
+    --crimson: 352.2 70% 49.6%;       /* #D7263D */
+    --crimson-hover: 355.8 76.8% 56.1%; /* #E53945 */
+    --steel: 210 4.3% 63.5%;          /* #9EA2A6 */
+
+    --micro-blue: 206.8 100% 40.4%;   /* #0072CE */
+    --micro-gold: 44 56.4% 56.9%;     /* #CFAE53 */
+    --micro-green: 142.8 100% 29.4%;  /* #009639 */
   }
 
+  /* Dark theme — our default palette */
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 240 8.3% 4.7%;       /* Deep Charcoal */
+    --foreground: 0 0% 96.1%;          /* Off-White */
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 240 8.3% 4.7%;
+    --card-foreground: 0 0% 96.1%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 240 8.3% 4.7%;
+    --popover-foreground: 0 0% 96.1%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    /* Use off-white for “primary” text on dark, crimson reserved for CTAs */
+    --primary: 0 0% 96.1%;
+    --primary-foreground: 240 8.3% 4.7%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 225 10% 7.8%;
+    --secondary-foreground: 0 0% 96.1%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 225 10% 7.8%;
+    --muted-foreground: 240 3.3% 70%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    /* Accent slots keep the section background shade */
+    --accent: 225 10% 7.8%;
+    --accent-foreground: 0 0% 96.1%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    /* Destructive can piggyback crimson if desired */
+    --destructive: 352.2 70% 49.6%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --border: 225 10% 7.8%;
+    --input: 225 10% 7.8%;
+    --ring: 355.8 76.8% 56.1%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 240 9.7% 6.1%;
+    --sidebar-foreground: 0 0% 96.1%;
+    --sidebar-primary: 206.8 100% 40.4%; /* micro blue for emphasis if used */
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 225 10% 7.8%;
+    --sidebar-accent-foreground: 0 0% 96.1%;
+    --sidebar-border: 225 10% 7.8%;
+    --sidebar-ring: 355.8 76.8% 56.1%;
+
+    /* === Brand extras (match Tailwind tokens) === */
+    --brand-900: 240 8.3% 4.7%;
+    --brand-800: 240 9.7% 6.1%;
+    --brand-700: 225 10% 7.8%;
+
+    --text-primary: 0 0% 96.1%;
+    --text-secondary: 240 3.3% 70%;
+
+    --crimson: 352.2 70% 49.6%;
+    --crimson-hover: 355.8 76.8% 56.1%;
+    --steel: 210 4.3% 63.5%;
+
+    --micro-blue: 206.8 100% 40.4%;
+    --micro-gold: 44 56.4% 56.9%;
+    --micro-green: 142.8 100% 29.4%;
   }
 }
 
@@ -98,8 +129,50 @@ All colors MUST be HSL.
   * {
     @apply border-border;
   }
-
-  body {
-    @apply bg-background text-foreground;
+  html {
+    scroll-behavior: smooth;
   }
+  body {
+    @apply bg-background text-foreground antialiased;
+    /* temp font stacks until we add actual font files/links */
+    font-family: var(--font-open-sans, Open Sans), system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  }
+  /* Headings: Montserrat, uppercase with slight tracking */
+  h1, h2, h3, .font-header {
+    font-family: var(--font-montserrat, Montserrat), var(--font-open-sans, Open Sans), system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.02em; /* +2% */
+  }
+
+  /* Accessible focus ring (crimson glow) */
+  :focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px hsl(var(--ring) / 0.45);
+    border-radius: 6px;
+  }
+}
+
+/* Utilities: spacing + subtle helpers */
+@layer utilities {
+  .container-px { @apply px-4 sm:px-6 lg:px-8; }
+  .section-y { @apply py-14 sm:py-16 lg:py-24; }
+
+  /* Brand button helpers (if you want to use utilities instead of a component) */
+  .btn-primary {
+    @apply inline-flex items-center justify-center font-semibold text-white
+           transition-transform duration-200 bg-[hsl(var(--crimson))]
+           hover:bg-[hsl(var(--crimson-hover))] hover:scale-[1.05] active:scale-95
+           h-11 px-5 rounded-md;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center font-semibold text-white
+           border rounded-md h-11 px-5
+           border-[hsl(var(--steel))] hover:text-[hsl(var(--crimson))]
+           hover:border-[hsl(var(--crimson))] transition-colors duration-200;
+  }
+
+  /* Tiny color dots for event tags (micro-accents) */
+  .dot-blue  { background-color: hsl(var(--micro-blue)); }
+  .dot-gold  { background-color: hsl(var(--micro-gold)); }
+  .dot-green { background-color: hsl(var(--micro-green)); }
 }
