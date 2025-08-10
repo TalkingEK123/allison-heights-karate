@@ -1,0 +1,24 @@
+[35mpackage-lock.json[m[36m:[m[32m39[m[36m:[m        "[1;31m@radix-ui/react-tooltip[m": "^1.2.7",
+[35mpackage-lock.json[m[36m:[m[32m1692[m[36m:[m    "node_modules/[1;31m@radix-ui/react-tooltip[m": {
+[35mpackage-lock.json[m[36m:[m[32m1694[m[36m:[m      "resolved": "https://registry.npmjs.org/[1;31m@radix-ui/react-tooltip[m/-/react-tooltip-1.2.7.tgz",
+[35mpackage-lock.json[m[36m:[m[32m1726[m[36m:[m    "node_modules/[1;31m@radix-ui/react-tooltip[m/node_modules/@radix-ui/primitive": {
+[35mpackage-lock.json[m[36m:[m[32m1732[m[36m:[m    "node_modules/[1;31m@radix-ui/react-tooltip[m/node_modules/@radix-ui/react-arrow": {
+[35mpackage-lock.json[m[36m:[m[32m1755[m[36m:[m    "node_modules/[1;31m@radix-ui/react-tooltip[m/node_modules/@radix-ui/react-compose-refs": {
+[35mpackage-lock.json[m[36m:[m[32m1770[m[36m:[m    "node_modules/[1;31m@radix-ui/react-tooltip[m/node_modules/@radix-ui/react-context": {
+[35mpackage-lock.json[m[36m:[m[32m1785[m[36m:[m    "node_modules/[1;31m@radix-ui/react-tooltip[m/node_modules/@radix-ui/react-dismissable-layer": {
+[35mpackage-lock.json[m[36m:[m[32m1812[m[36m:[m    "node_modules/[1;31m@radix-ui/react-tooltip[m/node_modules/@radix-ui/react-id": {
+[35mpackage-lock.json[m[36m:[m[32m1830[m[36m:[m    "node_modules/[1;31m@radix-ui/react-tooltip[m/node_modules/@radix-ui/react-popper": {
+[35mpackage-lock.json[m[36m:[m[32m1862[m[36m:[m    "node_modules/[1;31m@radix-ui/react-tooltip[m/node_modules/@radix-ui/react-portal": {
+[35mpackage-lock.json[m[36m:[m[32m1886[m[36m:[m    "node_modules/[1;31m@radix-ui/react-tooltip[m/node_modules/@radix-ui/react-presence": {
+[35mpackage-lock.json[m[36m:[m[32m1910[m[36m:[m    "node_modules/[1;31m@radix-ui/react-tooltip[m/node_modules/@radix-ui/react-primitive": {
+[35mpackage-lock.json[m[36m:[m[32m1933[m[36m:[m    "node_modules/[1;31m@radix-ui/react-tooltip[m/node_modules/@radix-ui/react-slot": {
+[35mpackage-lock.json[m[36m:[m[32m1951[m[36m:[m    "node_modules/[1;31m@radix-ui/react-tooltip[m/node_modules/@radix-ui/react-use-callback-ref": {
+[35mpackage-lock.json[m[36m:[m[32m1966[m[36m:[m    "node_modules/[1;31m@radix-ui/react-tooltip[m/node_modules/@radix-ui/react-use-controllable-state": {
+[35mpackage-lock.json[m[36m:[m[32m1985[m[36m:[m    "node_modules/[1;31m@radix-ui/react-tooltip[m/node_modules/@radix-ui/react-use-escape-keydown": {
+[35mpackage-lock.json[m[36m:[m[32m2003[m[36m:[m    "node_modules/[1;31m@radix-ui/react-tooltip[m/node_modules/@radix-ui/react-use-layout-effect": {
+[35mpackage-lock.json[m[36m:[m[32m2018[m[36m:[m    "node_modules/[1;31m@radix-ui/react-tooltip[m/node_modules/@radix-ui/react-use-rect": {
+[35mpackage-lock.json[m[36m:[m[32m2036[m[36m:[m    "node_modules/[1;31m@radix-ui/react-tooltip[m/node_modules/@radix-ui/react-use-size": {
+[35mpackage-lock.json[m[36m:[m[32m2054[m[36m:[m    "node_modules/[1;31m@radix-ui/react-tooltip[m/node_modules/@radix-ui/react-visually-hidden": {
+[35mpackage-lock.json[m[36m:[m[32m2077[m[36m:[m    "node_modules/[1;31m@radix-ui/react-tooltip[m/node_modules/@radix-ui/rect": {
+[35mpackage.json[m[36m:[m[32m50[m[36m:[m    "[1;31m@radix-ui/react-tooltip[m": "^1.2.7",
+[35msrc/components/ui/tooltip.tsx[m[36m:[m[32m2[m[36m:[mimport * as TooltipPrimitive from "[1;31m@radix-ui/react-tooltip[m"
