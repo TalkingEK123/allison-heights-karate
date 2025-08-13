@@ -19,7 +19,7 @@ const programs: Program[] = [
     schedule: ["Mon · 6:00–6:45 PM"],
     price: "$45 / month",
     badges: ["Beginner‑friendly", "Fun & Focus"],
-    photo: "public/images/allison_pics/Belt_tag.JPG",
+    photo: "public/images/Belt_tag.JPG",
     blurb:
       "Play‑based Shotokan foundations and dojo etiquette. Short, high‑energy sessions that build coordination and confidence.",
   },
@@ -30,7 +30,7 @@ const programs: Program[] = [
     schedule: ["Mon & Thu · 6:00–7:00 PM"],
     price: "$55 / month",
     badges: ["Kata + Kumite", "Strong Habits"],
-    photo: "public/images/allison_pics/young_eric_kick.jfif",
+    photo: "public/images/young_eric_kick.jfif",
     blurb:
       "Clean basics, kata precision, and light kumite to build timing. A supportive path toward provincial standards.",
   },
@@ -41,7 +41,7 @@ const programs: Program[] = [
     schedule: ["Mon & Thu · 6:00–8:00 PM"],
     price: "$60 / month",
     badges: ["Efficient Training", "Conditioning"],
-    photo: "public/images/allison_pics/Julie_kata.jpeg",
+    photo: "public/images/Julie_kata.jpeg",
     blurb:
       "Technical sessions with mobility and practical sparring concepts. Respectful, focused, and welcoming to newcomers.",
   },
@@ -52,7 +52,7 @@ const programs: Program[] = [
     schedule: ["Mon · 6:00–8:00 PM", "Thu · 6:00–8:00 PM", "Fri · 6:00–8:00 PM"],
     price: "$65 / month",
     badges: ["Tournament Prep", "Team NB / Canada Path"],
-    photo: "/placeholders/classes-performance.jpg",
+    photo: "public/images/Eric_kick.jpg",
     blurb:
       "Competition‑aligned training cycles, video feedback, and tactics—guided by active international experience.",
   },

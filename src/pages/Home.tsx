@@ -198,21 +198,21 @@ function Hero() {
 }
 
 /** =========================================================
- *  Mission (sleek glass cards)
+ *  Mission (sleek glass cards) — Final copy
  * ======================================================= */
 function Mission() {
   const items = [
     {
       title: "Excellence",
-      desc: "Clean technique, strong basics, and high standards—every class.",
+      desc: "Precise technique, strong fundamentals, and standards that rise with you in every class.",
     },
     {
       title: "Competition",
-      desc: "A path to Team NB & Team Canada for driven athletes.",
+      desc: "Elite coaching that builds the skills, mindset, and training to take you from your first medal to international success.",
     },
     {
       title: "Community",
-      desc: "Supportive, family‑friendly culture with real mentorship.",
+      desc: "A strong, supportive team that raises the standard for everyone on the mats.",
     },
   ];
 
@@ -222,10 +222,10 @@ function Mission() {
         <div className="text-center mb-10 md:mb-14">
           <p className="text-xs tracking-[0.22em] uppercase text-white/70">Our Mission</p>
           <h2 className="mt-2 text-3xl md:text-5xl font-bold tracking-tight text-white">
-            Tradition Shapes Us. Competition Drives Us.
+            Strong Karate. Strong People.
           </h2>
           <p className="mt-3 max-w-2xl mx-auto text-white/80">
-            We blend traditional Shotokan with high‑performance sport karate—developing character, skill, and confidence.
+            Through traditional Shotokan and high‑level training, we build not just champions in sport, but champions in life.
           </p>
         </div>
 
@@ -244,6 +244,7 @@ function Mission() {
     </Reveal>
   );
 }
+
 
 /** =========================================================
  *  News carousel with tag filters
