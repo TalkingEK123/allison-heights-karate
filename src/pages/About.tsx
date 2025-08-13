@@ -157,7 +157,7 @@ export default function About() {
               "
             >
               <img
-                src="/placeholders/about-story.jpg"
+                src="public/images/Karate_Photos/old_pic_many.jpeg"
                 alt="Focused athletes practicing combinations"
                 className="h-full w-full object-cover object-center"
                 loading="lazy"

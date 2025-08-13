@@ -19,7 +19,7 @@ const programs: Program[] = [
     schedule: ["Mon · 6:00–6:45 PM"],
     price: "$45 / month",
     badges: ["Beginner‑friendly", "Fun & Focus"],
-    photo: "/placeholders/classes-ninjas.jpg",
+    photo: "public/images/allison_pics/Belt_tag.JPG",
     blurb:
       "Play‑based Shotokan foundations and dojo etiquette. Short, high‑energy sessions that build coordination and confidence.",
   },
@@ -30,7 +30,7 @@ const programs: Program[] = [
     schedule: ["Mon & Thu · 6:00–7:00 PM"],
     price: "$55 / month",
     badges: ["Kata + Kumite", "Strong Habits"],
-    photo: "/placeholders/classes-youth.jpg",
+    photo: "public/images/allison_pics/young_eric_kick.jfif",
     blurb:
       "Clean basics, kata precision, and light kumite to build timing. A supportive path toward provincial standards.",
   },
@@ -41,7 +41,7 @@ const programs: Program[] = [
     schedule: ["Mon & Thu · 6:00–8:00 PM"],
     price: "$60 / month",
     badges: ["Efficient Training", "Conditioning"],
-    photo: "/placeholders/classes-adults.jpg",
+    photo: "public/images/allison_pics/Julie_kata.jpeg",
     blurb:
       "Technical sessions with mobility and practical sparring concepts. Respectful, focused, and welcoming to newcomers.",
   },

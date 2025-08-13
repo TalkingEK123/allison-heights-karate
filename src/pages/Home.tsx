@@ -130,8 +130,9 @@ const EVENTS: Event[] = [
  * ======================================================= */
 const HERO_IMAGES = [
   "public/images/action-1.jpg",
-  "/images/hero/action-2.jpg",
-  "/images/hero/action-3.jpg",
+  "public/images/allison_pics/team_kata_2.jpeg",
+  "public/images/allison_pics/Eric_Atlantic3.jpg",
+  "public/images/allison_pics/team_kata_bow.jpg",
 ]; // replace with your real photos (wide crops look best)
 
 function Hero() {
