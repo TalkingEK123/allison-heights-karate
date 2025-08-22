@@ -89,9 +89,9 @@ const CLUB_NEWS: NewsItem[] = [
     excerpt:
       "Huge congrats to our athletes earning Team NB selection after a strong summer circuit. Nationals up next—let’s keep building.",
     image: "/images/news/team-nb.jpg",
-    tag: "Selection",
+    tag: "Announcement",
   },
-  {
+ /* {
     id: "n-002",
     title: "Podium Finish at the Atlantic Championship",
     date: "2025-11-01",
@@ -108,7 +108,7 @@ const CLUB_NEWS: NewsItem[] = [
       "Fast‑paced session on distance control, timing entries, and scoring efficiency against elite opposition.",
     image: "/images/news/kumite-clinic.jpg",
     tag: "Clinic",
-  },
+  },*/
 ];
 
 type BeltKey =
