@@ -1,0 +1,51 @@
+// src/data/news.ts
+export type NewsTag = "Results" | "Selection" | "Clinic" | "Announcement";
+
+export type NewsItem = {
+  id: string;
+  title: string;
+  date: string;       // ISO
+  excerpt: string;
+  image: string;      // e.g. /images/news/*.jpg
+  tag?: NewsTag;
+  href?: string;
+  objectPosition?: string;
+};
+
+export const CLUB_NEWS: NewsItem[] = [
+  {
+    id: "n-olyvia-panams-2025",
+    title: "Olyvia Competes at the 2025 Junior Pan American Championships",
+    date: "2025-08-18",
+    excerpt:
+      "After earning silver at Nationals in Vancouver, Olyvia Kanashiro (13) now takes the continental stage. She competes for Team Canada at the 2025 Junior Pan American Championships in Asunción, Paraguay (Aug 25–31).",
+    image: "public/images/news_olyvia_portrait_3x4.webp",
+    tag: "Selection",
+    objectPosition: "38% 45%", // centers her face in tighter crops
+    //href: "/karate-info#club-news"
+  },
+  {
+    id: "n-002",
+    title: "Podium Finish at the Atlantic Championship",
+    date: "2025-11-01",
+    excerpt: "A gritty team performance with multiple medals. Sharp tactics and composure under pressure made the difference.",
+    image: "/images/news/atlantic-podium.jpg",
+    tag: "Results",
+  },
+  // {
+  //   id: "n-003",
+  //   title: "High-Performance Kumite Clinic",
+  //   date: "2025-10-05",
+  //   excerpt: "Fast-paced session on distance control, timing entries, and scoring efficiency against elite opposition.",
+  //   image: "/images/news/kumite-clinic.jpg",
+  //   tag: "Clinic",
+  // },
+  // {
+  //   id: "n-004",
+  //   title: "Fall Session Update",
+  //   date: "2025-09-01",
+  //   excerpt: "New Friday sparring class added. See schedule for details.",
+  //   image: "/images/news/fall-session.jpg",
+  //   tag: "Announcement",
+  // },
+];

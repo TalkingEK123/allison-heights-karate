@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { CLUB_NEWS, type NewsItem as SharedNewsItem } from "@/data/news";
 import {
   Select,
   SelectContent,
@@ -70,46 +71,6 @@ function Reveal({
   );
 }
 
-/** ============ Data ============ */
-type NewsItem = {
-  id: string;
-  title: string;
-  date: string; // ISO
-  excerpt: string;
-  image: string; // /images/news/*.jpg
-  tag?: string;
-  href?: string;
-};
-
-const CLUB_NEWS: NewsItem[] = [
-  {
-    id: "n-001",
-    title: "Three Allison Heights Athletes Selected for Team NB",
-    date: "2025-09-15",
-    excerpt:
-      "Huge congrats to our athletes earning Team NB selection after a strong summer circuit. Nationals up next—let’s keep building.",
-    image: "/images/news/team-nb.jpg",
-    tag: "Announcement",
-  },
- /* {
-    id: "n-002",
-    title: "Podium Finish at the Atlantic Championship",
-    date: "2025-11-01",
-    excerpt:
-      "A gritty team performance with multiple medals. Sharp tactics and composure under pressure made the difference.",
-    image: "/images/news/atlantic-podium.jpg",
-    tag: "Results",
-  },
-  {
-    id: "n-003",
-    title: "High‑Performance Kumite Clinic",
-    date: "2025-10-05",
-    excerpt:
-      "Fast‑paced session on distance control, timing entries, and scoring efficiency against elite opposition.",
-    image: "/images/news/kumite-clinic.jpg",
-    tag: "Clinic",
-  },*/
-];
 
 type BeltKey =
   | "white-yellow"
@@ -225,7 +186,7 @@ function SectionHeader({
   );
 }
 
-function NewsRow({ item, flip }: { item: NewsItem; flip?: boolean }) {
+function NewsRow({ item, flip }: { item: SharedNewsItem; flip?: boolean }) {
   return (
     <article
       className={cn(
@@ -234,11 +195,12 @@ function NewsRow({ item, flip }: { item: NewsItem; flip?: boolean }) {
       )}
     >
       {/* Image */}
-      <div className="relative aspect-[16/10] rounded-xl overflow-hidden md:flex-1 border border-steel/40 shadow-[0_20px_60px_rgba(0,0,0,0.55)]">
+      <div className="relative aspect-[20/22] rounded-xl overflow-hidden md:flex-1 border border-steel/40 shadow-[0_20px_60px_rgba(0,0,0,0.55)]">
         <img
           src={item.image}
           alt={item.title}
           className="h-full w-full object-cover transition-transform duration-500 will-change-transform hover:scale-[1.03]"
+          style={item.objectPosition ? { objectPosition: item.objectPosition } : undefined}
           loading="lazy"
           decoding="async"
           sizes="(max-width: 768px) 92vw, (max-width: 1280px) 46vw, 600px"

@@ -3,6 +3,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
+import { CLUB_NEWS, type NewsItem as SharedNewsItem } from "@/data/news"; 
+
 
 /** =========================================================
  *  Shared: simple reveal-on-scroll (same vibe as About)
@@ -59,52 +61,7 @@ function Reveal({
   );
 }
 
-/** =========================================================
- *  TEMP data (Move to /src/data later so Home/Info/Calendar share)
- * ======================================================= */
-type NewsItem = {
-  id: string;
-  title: string;
-  date: string; // ISO
-  excerpt: string;
-  image: string; // /images/news/*.jpg
-  tag: "Results" | "Selection" | "Clinic" | "Announcement";
-};
 
-const NEWS: NewsItem[] = [
-  {
-    id: "n-001",
-    title: "Three Allison Heights Athletes Selected for Team NB",
-    date: "2025-09-15",
-    excerpt: "Strong summer circuit → Team NB selections. Nationals up next.",
-    image: "/images/news/team-nb.jpg",
-    tag: "Selection",
-  },
-  {
-    id: "n-002",
-    title: "Podium Finish at the Atlantic Championship",
-    date: "2025-11-01",
-    excerpt: "Multiple medals. Composure + sharp tactics made the difference.",
-    image: "/images/news/atlantic-podium.jpg",
-    tag: "Results",
-  },
-  {
-    id: "n-003",
-    title: "High‑Performance Kumite Clinic",
-    date: "2025-10-05",
-    excerpt: "Distance control, timing entries, scoring efficiency.",
-    image: "/images/news/kumite-clinic.jpg",
-    tag: "Clinic",
-  },
-  {
-    id: "n-004",
-    title: "Fall Session Update",
-    date: "2025-09-01",
-    excerpt: "New Friday sparring class added. See schedule for details.",
-    image: "/images/news/fall-session.jpg",
-    tag: "Announcement",
-  },
-];
 
 type EventType = "Training" | "Competition" | "Testing" | "Seminar" | "Special";
 type Event = {
@@ -133,7 +90,7 @@ const HERO_IMAGES = [
   "public/images/team_kata_2.jpeg",
   "public/images/Eric_Atlantic3.jpg",
   "public/images/team_kata_bow.jpg",
-]; // replace with your real photos (wide crops look best)
+]; 
 
 function Hero() {
   const [idx, setIdx] = useState(0);
@@ -161,6 +118,7 @@ function Hero() {
               className="h-full w-full object-cover"
               loading={i === 0 ? "eager" : "lazy"}
               decoding={i === 0 ? "sync" : "async"}
+              
             />
             {/* Dark tint & subtle depth */}
             <div className="absolute inset-0 bg-black/65" />
@@ -250,14 +208,19 @@ function Mission() {
  *  News carousel with tag filters
  * ======================================================= */
 function NewsCarousel() {
-  const [tag, setTag] = useState<"All" | NewsItem["tag"]>("All");
+  const [tag, setTag] = useState<"All" | SharedNewsItem["tag"]>("All");
 
   const filtered = useMemo(
-    () => (tag === "All" ? NEWS : NEWS.filter((n) => n.tag === tag)),
+    () => (tag === "All" ? CLUB_NEWS : CLUB_NEWS.filter((n) => n.tag === tag)),
     [tag]
   );
 
-  const tags: ("All" | NewsItem["tag"])[] = ["All", "Results", "Selection", "Clinic", "Announcement"];
+   // Optional: build tags dynamically from your data so only real tags show
+  const tags = useMemo(() => {
+    const s = new Set<SharedNewsItem["tag"]>();
+    CLUB_NEWS.forEach(n => n.tag && s.add(n.tag));
+    return ["All", ...Array.from(s)] as const;
+  }, []);
 
   return (
     <Reveal className="section-y border-t border-steel/40 bg-brand-900">
@@ -297,16 +260,17 @@ function NewsCarousel() {
         <div className="overflow-x-auto scroll-smooth">
           <ul className="flex gap-5 md:gap-6 snap-x snap-mandatory pe-4">
             {filtered.map((n) => (
-              <li key={n.id} className="min-w-[84%] sm:min-w-[60%] md:min-w-[46%] lg:min-w-[36%] snap-start">
+              <li key={n.id} className="min-w-[72%] sm:min-w-[54%] md:min-w-[44%] lg:min-w-[34%] snap-start">
                 <Link to="/karate-info#club-news" className="group block">
                   <article className="rounded-xl border border-white/10 bg-white/[0.06] overflow-hidden hover:-translate-y-0.5 transition-transform backdrop-blur-sm">
-                    <div className="relative aspect-[16/10] overflow-hidden">
+                    <div className="relative aspect-[9/10] overflow-hidden">
                       <img
                         src={n.image}
                         alt=""
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                         loading="lazy"
                         decoding="async"
+                        style={n.objectPosition ? { objectPosition: n.objectPosition } : undefined}
                       />
                       <span className="absolute left-3 top-3 rounded-md bg-black/50 px-2 py-1 text-xs uppercase tracking-wide text-white/90 ring-1 ring-white/20">
                         {n.tag}
@@ -317,7 +281,12 @@ function NewsCarousel() {
                         {new Date(n.date).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })}
                       </p>
                       <h3 className="mt-1 text-lg font-semibold text-white">{n.title}</h3>
-                      <p className="mt-1 text-white/85">{n.excerpt}</p>
+
+                      {/* Learn more (keeps the whole card as one link; no nested <a>) */}
+                      <span className="mt-2 inline-flex items-center text-white/80 underline-offset-4 group-hover:text-white group-hover:underline">
+                        Learn more
+                        <span aria-hidden="true" className="ms-1 transition-transform group-hover:translate-x-0.5">→</span>
+                      </span>
                     </div>
                   </article>
                 </Link>
