@@ -75,7 +75,7 @@ const coaches: Coach[] = [
   {
     name: "Emmanuel Leblanc",
     role: "Sensei • Founder",
-    photo: "/images/Many_headshot.JPEG",
+    photo: "/images/Many_headshot.jpeg",
     creds: ["National Referee, Karate Canada",
             "Traditional Shotokan mentor",
             "Over 30 years of coaching & leadership"],
@@ -84,7 +84,7 @@ const coaches: Coach[] = [
   {
     name: "Julie Losier",
     role: "Coach • Kata",
-    photo: "/images/image6.JPEG",
+    photo: "/images/image6.jpeg",
     creds: ["Former national-level Kata competitor",
             "Mentor for women in sport",
             "Technical specialist in form & precision",],
@@ -93,7 +93,7 @@ const coaches: Coach[] = [
   {
     name: "Denis Leblanc",
     role: "Coach • Youth Program",
-    photo: "/images/Denis_headshot.JPEG",
+    photo: "/images/Denis_headshot.jpeg",
     creds: ["Experienced youth coach & team manager",
             "Specialist in athlete development (ages 5–12)",
             "Building confidence and fundamentals in young athletes"],
