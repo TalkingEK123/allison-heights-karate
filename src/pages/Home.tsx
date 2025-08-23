@@ -362,7 +362,7 @@ function Footer() {
         <div>
           <h5 className="text-white font-semibold">Location</h5>
           <p className="mt-2 text-white/85">
-            20 Karolie Rd<br />Riverview, NB E1B 1R1
+            200 Karolie Rd<br />Riverview, NB E1B 1R1
           </p>
           <p className="mt-2">
             <a href="tel:+15062953889" className="text-white/85 hover:underline">(506) 295‑3889</a><br />
