@@ -70,7 +70,7 @@ const HERO_IMAGES = [
   "/images/action-1.jpg",
   "/images/team_kata_2.jpeg",
   "/images/Eric_Atlantic3.jpg",
-  "/images/team_kata_bow.jpg",
+  "/images/team_kata_bow.JPG",
 ]; 
 
 function Hero() {
