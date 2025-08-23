@@ -66,7 +66,7 @@ const coaches: Coach[] = [
   {
     name: "Youssef Ismail",
     role: "Head Coach • Kumite",
-    photo: "public/images/IMG_5591.JPG",
+    photo: "/images/IMG_5591.JPG",
     creds: ["Active Team Canada athlete (Kumite)",
             "Team New Brunswick Coach",
             "International medalist & high-performance mentor",],
@@ -75,7 +75,7 @@ const coaches: Coach[] = [
   {
     name: "Emmanuel Leblanc",
     role: "Sensei • Founder",
-    photo: "public/images/Many_headshot.JPEG",
+    photo: "/images/Many_headshot.JPEG",
     creds: ["National Referee, Karate Canada",
             "Traditional Shotokan mentor",
             "Over 30 years of coaching & leadership"],
@@ -84,7 +84,7 @@ const coaches: Coach[] = [
   {
     name: "Julie Losier",
     role: "Coach • Kata",
-    photo: "public/images/image6.JPEG",
+    photo: "/images/image6.JPEG",
     creds: ["Former national-level Kata competitor",
             "Mentor for women in sport",
             "Technical specialist in form & precision",],
@@ -93,7 +93,7 @@ const coaches: Coach[] = [
   {
     name: "Denis Leblanc",
     role: "Coach • Youth Program",
-    photo: "public/images/Denis_headshot.JPEG",
+    photo: "/images/Denis_headshot.JPEG",
     creds: ["Experienced youth coach & team manager",
             "Specialist in athlete development (ages 5–12)",
             "Building confidence and fundamentals in young athletes"],
@@ -152,7 +152,7 @@ export default function About() {
         <div className="mx-auto max-w-6xl grid md:grid-cols-2 items-center gap-10 px-4 md:px-6">
           <figure className="relative rounded-xl overflow-hidden border border-steel/40 shadow-[0_20px_60px_rgba(0,0,0,0.6)] aspect-[4/3] md:aspect-[5/4]">
             <img
-              src="public/images/old_pic_many.jpeg"
+              src="/images/old_pic_many.jpeg"
               alt="Focused athletes practicing combinations"
               className="h-full w-full object-cover"
               loading="lazy"
@@ -194,7 +194,7 @@ export default function About() {
           </div>
           <figure className="relative rounded-xl overflow-hidden border border-steel/40 shadow-[0_20px_60px_rgba(0,0,0,0.6)] aspect-[4/3] md:aspect-[5/4]">
             <img
-              src="public/images/group_podium.JPG"
+              src="/images/group_podium.JPG"
               alt="Athletes celebrating on podium"
               className="h-full w-full object-cover"
               loading="lazy"

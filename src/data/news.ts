@@ -19,7 +19,7 @@ export const CLUB_NEWS: NewsItem[] = [
     date: "2025-08-18",
     excerpt:
       "After earning silver at Nationals in Vancouver, Olyvia Kanashiro (13) now takes the continental stage. She competes for Team Canada at the 2025 Junior Pan American Championships in Asunción, Paraguay (Aug 25–31).",
-    image: "public/images/news_olyvia_portrait_3x4.webp",
+    image: "/images/news_olyvia_portrait_3x4.webp",
     tag: "Selection",
     objectPosition: "38% 25%", // centers her face in tighter crops
     //href: "/karate-info#club-news"
@@ -30,7 +30,7 @@ export const CLUB_NEWS: NewsItem[] = [
     date: "2025-08-22",
     excerpt:
       "Karate New Brunswick announces its updated Athlete Development Program for the 2025–2026 season. The ADP provides a clear pathway for athletes across the province—from dojo training to Team NB and Team Canada standards. Key features include province-wide training, qualification tournaments, sport science support, and more.",
-    image: "public/images/ADP_Poster.PNG", // save the provided image here
+    image: "/images/ADP_Poster.PNG", // save the provided image here
     tag: "Announcement",
     objectPosition: "38% 42%",
     href: "/docs/knb-adp-2025-2026.pdf",
