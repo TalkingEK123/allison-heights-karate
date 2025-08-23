@@ -21,7 +21,7 @@ export const CLUB_NEWS: NewsItem[] = [
       "After earning silver at Nationals in Vancouver, Olyvia Kanashiro (13) now takes the continental stage. She competes for Team Canada at the 2025 Junior Pan American Championships in Asunción, Paraguay (Aug 25–31).",
     image: "public/images/news_olyvia_portrait_3x4.webp",
     tag: "Selection",
-    objectPosition: "38% 45%", // centers her face in tighter crops
+    objectPosition: "38% 25%", // centers her face in tighter crops
     //href: "/karate-info#club-news"
   },
   {

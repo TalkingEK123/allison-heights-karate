@@ -224,7 +224,7 @@ function NewsCarousel() {
 
   return (
     <Reveal className="section-y border-t border-steel/40 bg-brand-900">
-      <div className="mx-auto max-w-6xl px-4 md:px-6">
+      <div className="mx-auto max-w-4xl px-4 md:px-6">
         <div className="flex items-end justify-between gap-4 mb-4">
           <div>
             <p className="text-xs tracking-[0.22em] uppercase text-white/70">Club News</p>
@@ -260,10 +260,10 @@ function NewsCarousel() {
         <div className="overflow-x-auto scroll-smooth">
           <ul className="flex gap-5 md:gap-6 snap-x snap-mandatory pe-4">
             {filtered.map((n) => (
-              <li key={n.id} className="min-w-[72%] sm:min-w-[54%] md:min-w-[44%] lg:min-w-[34%] snap-start">
+              <li key={n.id} className="min-w-[70%] sm:min-w-[50%] md:min-w-[40%] lg:min-w-[30%] snap-start">
                 <Link to="/karate-info#club-news" className="group block">
                   <article className="rounded-xl border border-white/10 bg-white/[0.06] overflow-hidden hover:-translate-y-0.5 transition-transform backdrop-blur-sm">
-                    <div className="relative aspect-[9/10] overflow-hidden">
+                    <div className="relative aspect-[4/3] md:aspect-[16/10] overflow-hidden">
                       <img
                         src={n.image}
                         alt=""
@@ -276,7 +276,7 @@ function NewsCarousel() {
                         {n.tag}
                       </span>
                     </div>
-                    <div className="p-5">
+                    <div className="p-4 md:p-5">
                       <p className="text-white/60 text-xs">
                         {new Date(n.date).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })}
                       </p>
