@@ -15,10 +15,10 @@ export type NewsItem = {
 export const CLUB_NEWS: NewsItem[] = [
   {
     id: "n-olyvia-panams-2025",
-    title: "Olyvia Competes at the 2025 Junior Pan American Championships",
+    title: "Olivya Competes at the 2025 Junior Pan American Championships",
     date: "2025-08-18",
     excerpt:
-      "After earning silver at Nationals in Vancouver, Olyvia Kanashiro (13) now takes the continental stage. She competes for Team Canada at the 2025 Junior Pan American Championships in Asunción, Paraguay (Aug 25–31).",
+      "After earning her second silver at the 2025 Nationals in Vancouver, Olivya Kanashiro (13) now takes the continental stage for the second time. She competes for Team Canada at the 2025 Junior Pan American Championships in Asunción, Paraguay (Aug 25–31).",
     image: "/images/news_olyvia_portrait_3x4.webp",
     tag: "Selection",
     objectPosition: "38% 25%", // centers her face in tighter crops
