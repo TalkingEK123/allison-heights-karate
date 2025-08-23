@@ -30,7 +30,7 @@ export const CLUB_NEWS: NewsItem[] = [
     date: "2025-08-22",
     excerpt:
       "Karate New Brunswick announces its updated Athlete Development Program for the 2025–2026 season. The ADP provides a clear pathway for athletes across the province—from dojo training to Team NB and Team Canada standards. Key features include province-wide training, qualification tournaments, sport science support, and more.",
-    image: "/images/ADP_Poster.PNG", // save the provided image here
+    image: "./images/ADP_Poster.PNG", // save the provided image here
     tag: "Announcement",
     objectPosition: "38% 42%",
     href: "/docs/knb-adp-2025-2026.pdf",
