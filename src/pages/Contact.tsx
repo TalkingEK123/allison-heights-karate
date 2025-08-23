@@ -272,7 +272,7 @@ export default function Contact() {
                 <div className="mt-4 grid gap-4 text-white/85">
                   <div>
                     <p className="text-xs uppercase tracking-wide text-white/60">Address</p>
-                    <p>20 Karolie Rd<br />Riverview, NB E1B 1R1</p>
+                    <p>200 Karolie Rd<br />Riverview, NB E1B 1R1</p>
                   </div>
                   <div className="grid sm:grid-cols-2 gap-4 min-w-0">
                     <div>
