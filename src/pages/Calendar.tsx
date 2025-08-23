@@ -2,55 +2,15 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Calendar as DayPicker } from "@/components/ui/calendar";
 import { enCA } from "date-fns/locale";
+import { EVENTS, type Event, type EventType, ymd } from "@/data/events";
 
 /** ===================== Config =====================
  * Set the calendar week start here:
  * 0 = Sunday (common for Canada), 1 = Monday (ISO 8601)
  */
-const WEEK_START: 0 | 1 = 0;
+const WEEK_START: 0 | 1 = 1;
 
-/** ===================== Types & Data ===================== */
-type EventType = "Training" | "Competition" | "Testing" | "Seminar" | "Special";
 
-type Event = {
-  id: string;
-  title: string;
-  type: EventType;
-  start: string; // ISO date (YYYY-MM-DD) or ISO datetime
-  end?: string;  // ISO date for multi-day spans
-  time: string;  // human-friendly time
-  location: string;
-  url?: string;  // optional registration/info link
-};
-
-/**
- * 🔧 EDIT THIS ARRAY to add/remove events.
- * Dates: "YYYY-MM-DD". Add `end` for multi‑day spans. Add `url` for registration.
- */
-const EVENTS: Event[] = [
-  { id: "knb-open-2025-09-14", title: "Karate New Brunswick Open Team Training", type: "Training", start: "2025-09-14", time: "9:30 AM – 3:00 PM", location: "KV Karate Club (Saint John, NB)" },
-  { id: "knb-gp-2025-09-20", title: "Karate New Brunswick Grand Prix", type: "Competition", start: "2025-09-20", time: "9:00 AM – 4:00 PM", location: "Tracadie, NB" },
-  { id: "knb-open-2-2025-09-14", title: "Karate New Brunswick Open Training", type: "Training", start: "2025-09-14", time: "9:30 AM – 5:00 PM", location: "Saint John, NB" },
-  { id: "knb-gp-2-2025-09-20", title: "Karate New Brunswick Grand Prix", type: "Competition", start: "2025-09-20", time: "9:30 AM – 5:00 PM", location: "Tracadie, NB" },
-  { id: "knb-clinic-2025-09-21", title: "Karate New Brunswick Clinic", type: "Training", start: "2025-09-21", time: "9:00 AM – 1:00 PM", location: "Tracadie, NB" },
-  { id: "knb-fitness-2025-09-27", title: "KNB Fitness Test (CSIA)", type: "Testing", start: "2025-09-27", time: "1:00 PM – 5:00 PM", location: "Fredericton, NB" },
-  { id: "nss-kumite-2025-10-03", title: "Nova Scotia Kumite Clinic (Yevhen)", type: "Seminar", start: "2025-10-03", end: "2025-10-05", time: "All day", location: "Halifax, NS", url: "https://example.com/register" },
-  { id: "knb-open-2025-10-12", title: "Karate New Brunswick Open Training", type: "Training", start: "2025-10-12", time: "9:30 AM – 3:00 PM", location: "Saint John, NB" },
-  { id: "atlantic-champs-2025-11-01", title: "Atlantic Championship", type: "Competition", start: "2025-11-01", time: "All day", location: "Moncton, NB", url: "https://example.com/atlantic" },
-  { id: "kc-regional-2025-11-02", title: "Karate Canada Regional Camp", type: "Special", start: "2025-11-02", time: "9:30 AM – 4:00 PM", location: "Moncton, NB" },
-  { id: "knb-open-2025-11-16", title: "Karate New Brunswick Open Training", type: "Training", start: "2025-11-16", time: "9:30 AM – 3:00 PM", location: "Saint John, NB" },
-  { id: "ns-gp-2025-11-22", title: "Karate Nova Scotia Grand Prix", type: "Competition", start: "2025-11-22", time: "9:30 AM – 4:30 PM", location: "Spryfield, Halifax, NS" },
-  { id: "knb-open-2025-12-14", title: "Karate New Brunswick Open Training", type: "Training", start: "2025-12-14", time: "9:30 AM – 3:00 PM", location: "Saint John, NB" },
-  { id: "knb-open-2026-01-18", title: "Karate New Brunswick Open Training", type: "Training", start: "2026-01-18", time: "9:30 AM – 3:00 PM", location: "Saint John, NB" },
-  { id: "knb-gp-2026-02-07", title: "Karate New Brunswick Grand Prix", type: "Competition", start: "2026-02-07", time: "9:30 AM – 5:00 PM", location: "Moncton, NB" },
-  { id: "knb-clinic-2026-02-08", title: "Karate New Brunswick Clinic", type: "Training", start: "2026-02-08", time: "9:00 AM – 1:00 PM", location: "TBD" },
-  { id: "knb-closed-2026-03-08", title: "Karate New Brunswick Closed Training", type: "Training", start: "2026-03-08", time: "9:30 AM – 3:00 PM", location: "Saint John, NB" },
-  { id: "knb-closed-2026-03-22", title: "Karate New Brunswick Closed Training", type: "Training", start: "2026-03-22", time: "9:30 AM – 3:00 PM", location: "Saint John, NB" },
-  { id: "knb-closed-2026-04-05", title: "Karate New Brunswick Closed Training", type: "Training", start: "2026-04-05", time: "9:30 AM – 3:00 PM", location: "Saint John, NB" },
-  { id: "knb-closed-2026-04-19", title: "Karate New Brunswick Closed Training", type: "Training", start: "2026-04-19", time: "9:30 AM – 3:00 PM", location: "Saint John, NB" },
-  { id: "knb-closed-2026-04-26", title: "Karate New Brunswick Closed Training", type: "Training", start: "2026-04-26", time: "9:30 AM – 3:00 PM", location: "Saint John, NB" },
-  { id: "knb-closed-2026-05-03", title: "Karate New Brunswick Closed Training", type: "Training", start: "2026-05-03", time: "9:30 AM – 3:00 PM", location: "Saint John, NB" },
-];
 
 /** High‑contrast colors on dark background */
 const TYPE_COLOR: Record<EventType, { chip: string; dot: string; label: string }> = {
@@ -61,14 +21,7 @@ const TYPE_COLOR: Record<EventType, { chip: string; dot: string; label: string }
   Special:     { chip: "bg-[#A855F7] text-white", dot: "bg-[#A855F7]", label: "Special" },     // violet
 };
 
-/** ===================== Utils ===================== */
-const ymd = (d: string | Date) => {
-  const date = typeof d === "string" ? new Date(d) : d;
-  const yyyy = date.getFullYear();
-  const mm = `${date.getMonth() + 1}`.padStart(2, "0");
-  const dd = `${date.getDate()}`.padStart(2, "0");
-  return `${yyyy}-${mm}-${dd}`;
-};
+
 
 const enumerateDates = (startISO: string, endISO?: string) => {
   const out: string[] = [];

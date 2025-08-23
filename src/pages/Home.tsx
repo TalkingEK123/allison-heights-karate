@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { CLUB_NEWS, type NewsItem as SharedNewsItem } from "@/data/news"; 
-
+import { EVENTS, type EventType, ymd } from "@/data/events";
 
 /** =========================================================
  *  Shared: simple reveal-on-scroll (same vibe as About)
@@ -62,25 +62,6 @@ function Reveal({
 }
 
 
-
-type EventType = "Training" | "Competition" | "Testing" | "Seminar" | "Special";
-type Event = {
-  id: string;
-  title: string;
-  type: EventType;
-  start: string;     // ISO YYYY-MM-DD
-  end?: string;
-  time: string;
-  location: string;
-  url?: string;
-};
-
-const EVENTS: Event[] = [
-  { id: "knb-gp-2025-09-20", title: "Karate NB Grand Prix", type: "Competition", start: "2025-09-20", time: "9:00 AM – 4:00 PM", location: "Tracadie, NB" },
-  { id: "nss-kumite-2025-10-03", title: "NS Kumite Clinic (Yevhen)", type: "Seminar", start: "2025-10-03", end: "2025-10-05", time: "All day", location: "Halifax, NS" },
-  { id: "atlantic-champs-2025-11-01", title: "Atlantic Championship", type: "Competition", start: "2025-11-01", time: "All day", location: "Moncton, NB" },
-  // ...you can add more or import from a shared file later
-];
 
 /** =========================================================
  *  HERO: Slideshow with dark tint
@@ -302,13 +283,6 @@ function NewsCarousel() {
 /** =========================================================
  *  Upcoming events (next 3)
  * ======================================================= */
-function ymd(d: Date | string) {
-  const dd = typeof d === "string" ? new Date(d) : d;
-  const y = dd.getFullYear();
-  const m = `${dd.getMonth() + 1}`.padStart(2, "0");
-  const day = `${dd.getDate()}`.padStart(2, "0");
-  return `${y}-${m}-${day}`;
-}
 
 function UpcomingEvents() {
   const next = useMemo(() => {
