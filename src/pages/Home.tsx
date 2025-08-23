@@ -67,10 +67,10 @@ function Reveal({
  *  HERO: Slideshow with dark tint
  * ======================================================= */
 const HERO_IMAGES = [
-  "public/images/action-1.jpg",
-  "public/images/team_kata_2.jpeg",
-  "public/images/Eric_Atlantic3.jpg",
-  "public/images/team_kata_bow.jpg",
+  "/images/action-1.jpg",
+  "/images/team_kata_2.jpeg",
+  "/images/Eric_Atlantic3.jpg",
+  "/images/team_kata_bow.jpg",
 ]; 
 
 function Hero() {
