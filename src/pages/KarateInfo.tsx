@@ -156,7 +156,7 @@ const KUMITE_GEAR = [
 ];
 
 const DOCS = [
-  { name: "Athlete Development Program (Team NB)", href: "/docs/athlete-development.pdf" },
+  { name: "Athlete Development Program (Team NB)", href: "/docs/knb-adp-2025-2026.pdf" },
   { name: "WKF Rules", href: "/docs/wkf-rules.pdf" },
   { name: "Photo / Media Consent", href: "/docs/photo-consent.pdf" },
 ];
@@ -321,7 +321,7 @@ export default function KarateInfo() {
                   <SectionHeader
                     eyebrow="News"
                     title="Athlete Highlights & Major Updates"
-                    subtitle="Big visuals. Clean typography. Mobile‑first, fast to scan."
+                    subtitle="Stay up to date with the latest news, highlights, and achievements from our club."
                   />
                   <div className="grid gap-16 md:gap-20">
                     {CLUB_NEWS.map((n, i) => (

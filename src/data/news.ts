@@ -25,13 +25,24 @@ export const CLUB_NEWS: NewsItem[] = [
     //href: "/karate-info#club-news"
   },
   {
-    id: "n-002",
-    title: "Podium Finish at the Atlantic Championship",
-    date: "2025-11-01",
-    excerpt: "A gritty team performance with multiple medals. Sharp tactics and composure under pressure made the difference.",
-    image: "/images/news/atlantic-podium.jpg",
-    tag: "Results",
+    id: "n-knb-adp-2025",
+    title: "KNB Launches 2025–2026 Athlete Development Program",
+    date: "2025-08-22",
+    excerpt:
+      "Karate New Brunswick announces its updated Athlete Development Program for the 2025–2026 season. The ADP provides a clear pathway for athletes across the province—from dojo training to Team NB and Team Canada standards. Key features include province-wide training, qualification tournaments, sport science support, and more.",
+    image: "public/images/ADP_Poster.PNG", // save the provided image here
+    tag: "Announcement",
+    objectPosition: "38% 42%",
+    href: "/docs/knb-adp-2025-2026.pdf",
   },
+  // {
+  //   id: "n-002",
+  //   title: "Podium Finish at the Atlantic Championship",
+  //   date: "2025-11-01",
+  //   excerpt: "A gritty team performance with multiple medals. Sharp tactics and composure under pressure made the difference.",
+  //   image: "/images/news/atlantic-podium.jpg",
+  //   tag: "Results",
+  // },
   // {
   //   id: "n-003",
   //   title: "High-Performance Kumite Clinic",
