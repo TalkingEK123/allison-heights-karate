@@ -12,7 +12,7 @@ import KarateInfo from "./pages/KarateInfo";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "@/components/ScrollToTop";
-
+import PageTransition from "@/components/PageTransition";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -33,7 +33,8 @@ const App = () => (
         </a>
 
         {/* App shell */}
-        <ScrollToTop behavior="smooth" />
+        <ScrollToTop />
+        <PageTransition targetId="main" durationMs={220} />
         <div className="min-h-screen bg-brand-900 text-text-primary">
           {/* If Header is fixed later, we’ll add top padding to <main> */}
           <Header />

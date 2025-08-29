@@ -1,22 +1,19 @@
 // src/components/ScrollToTop.tsx
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-/** Scroll window (or a container) to top whenever the route changes. */
-export default function ScrollToTop({ containerId, behavior = "instant" }: {
-  containerId?: string;            // if you scroll inside a div, pass its id
-  behavior?: ScrollBehavior;       // "smooth" | "instant"
-}) {
+/** Instantly reset scroll to top on route change (before paint). */
+export default function ScrollToTop({ containerId }: { containerId?: string }) {
   const { pathname, search, hash } = useLocation();
 
-  useEffect(() => {
-    // If there's a hash, let the in-page jump handle it.
+  useLayoutEffect(() => {
+    // Let in-page anchors (#hash) handle their own scroll target.
     if (hash) return;
 
     const el = containerId ? document.getElementById(containerId) : null;
-    if (el) el.scrollTo({ top: 0, left: 0, behavior });
-    else window.scrollTo({ top: 0, left: 0, behavior });
-  }, [pathname, search, hash, containerId, behavior]);
+    if (el) el.scrollTo(0, 0);
+    else window.scrollTo(0, 0);
+  }, [pathname, search, hash, containerId]);
 
   return null;
 }
