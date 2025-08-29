@@ -242,7 +242,7 @@ function NewsCarousel() {
           <ul className="flex gap-5 md:gap-6 snap-x snap-mandatory pe-4">
             {filtered.map((n) => (
               <li key={n.id} className="min-w-[70%] sm:min-w-[50%] md:min-w-[40%] lg:min-w-[30%] snap-start">
-                <Link to="/karate-info#club-news" className="group block">
+                <Link to={`/karate-info#news-${n.id}`} className="group block">
                   <article className="rounded-xl border border-white/10 bg-white/[0.06] overflow-hidden hover:-translate-y-0.5 transition-transform backdrop-blur-sm">
                     <div className="relative aspect-[4/3] md:aspect-[16/10] overflow-hidden">
                       <img

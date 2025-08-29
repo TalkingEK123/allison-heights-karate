@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CLUB_NEWS, type NewsItem as SharedNewsItem } from "@/data/news";
+import { useLocation } from "react-router-dom";
 import {
   Select,
   SelectContent,
@@ -186,9 +187,11 @@ function SectionHeader({
   );
 }
 
-function NewsRow({ item, flip }: { item: SharedNewsItem; flip?: boolean }) {
+function NewsRow({ item, flip, id }: { item: SharedNewsItem; flip?: boolean; id?: string }) {
   return (
     <article
+      id={id}
+      style={{ scrollMarginTop: "6rem" }} // adjust to your sticky header/tabs height
       className={cn(
         "flex flex-col gap-6 md:gap-10 md:items-stretch md:flex-row",
         flip && "md:flex-row-reverse"
@@ -286,7 +289,12 @@ function GearBlock({
 export default function KarateInfo() {
   const [beltKey, setBeltKey] = useState<BeltKey>("white-yellow");
   const belt = BELTS[beltKey];
-
+  const { hash } = useLocation();
+  useEffect(() => {
+    if (!hash) return;
+    const el = document.getElementById(hash.replace(/^#/, ""));
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [hash]);
   return (
     <main id="main" className="bg-brand-900 text-primary">
       <section className="py-6 md:py-8">
@@ -325,7 +333,7 @@ export default function KarateInfo() {
                   />
                   <div className="grid gap-16 md:gap-20">
                     {CLUB_NEWS.map((n, i) => (
-                      <NewsRow key={n.id} item={n} flip={i % 2 === 1} />
+                      <NewsRow key={n.id} id={`news-${n.id}`} item={n} flip={i % 2 === 1} />
                     ))}
                   </div>
                 </Reveal>

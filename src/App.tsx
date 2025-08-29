@@ -11,6 +11,7 @@ import Calendar from "./pages/Calendar";
 import KarateInfo from "./pages/KarateInfo";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App = () => (
 
       <BrowserRouter>
         {/* Accessible skip link */}
+
         <a
           href="#main"
           className="absolute left-2 top-2 z-[100] -translate-y-16 focus:translate-y-0 rounded-md bg-[hsl(var(--crimson))] px-3 py-2 text-sm font-semibold text-white transition-transform"
@@ -31,6 +33,7 @@ const App = () => (
         </a>
 
         {/* App shell */}
+        <ScrollToTop behavior="smooth" />
         <div className="min-h-screen bg-brand-900 text-text-primary">
           {/* If Header is fixed later, we’ll add top padding to <main> */}
           <Header />
