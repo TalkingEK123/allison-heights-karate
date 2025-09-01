@@ -29,29 +29,29 @@ export const EVENTS: Event[] = [
 
     { id: "knb-open-2025-09-14", title: "KNB Open Development Training #1", type: "Training", start: "2025-09-14", time: "Daytime", location: "Saint John, NB" },
 
-    { id: "knb-gp1-2025-09-20", title: "KNB Grand Prix #1", type: "Competition", start: "2025-09-20", end: "2025-09-21", time: "All day", location: "Tracadie, NB" },
-    { id: "knb-clinic-2025-09-21", title: "KNB Clinic", type: "Training", start: "2025-09-21", time: "Daytime", location: "Tracadie, NB" },
+    { id: "knb-gp1-2025-09-20", title: "KNB Grand Prix #1", type: "Competition", start: "2025-09-20", time: "All day", location: "Tracadie, NB", url:"https://can01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.karatenb.com%2Fevents-1%2F2025-knb-grand-prix-1-tracadie-nb&data=05%7C02%7Ceyi1901%40umoncton.ca%7C5c4166b8c1b343fe122608dde9652e97%7C810c295fe8174c4e89969b66369b8012%7C0%7C0%7C638923342991234606%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=jHHUhRXcQY9eBw7FpXD6WoJJJJa8iBno4kmPIqB0M7o%3D&reserved=0" },
+    { id: "knb-clinic-2025-09-21", title: "KNB Clinic", type: "Training", start: "2025-09-21", time: "9:30 am - 2:00 pm", location: "Tracadie, NB" },
 
     { id: "knb-fitness-2025-09-27", title: "KNB Fitness Testing — CSIA High Performance Gym", type: "Testing", start: "2025-09-27", time: "Afternoon", location: "Fredericton, NB" },
 
     { id: "kns-kumite-yevhen-2025-10-03", title: "KNS Kumite Clinic (Yevhen Motovylin)", type: "Seminar", start: "2025-10-03", end: "2025-10-05", time: "All day", location: "Halifax, NS", url:"https://karatens.org/events/kumite-clinic-yevhen-motovylin/" },
 
-    { id: "atlantic-gp2-2025-11-01", title: "Atlantic Championships / KNB Grand Prix #2", type: "Competition", start: "2025-11-01", end: "2025-11-02", time: "All day", location: "Moncton, NB" },
+    { id: "atlantic-gp2-2025-11-01", title: "Atlantic Championships / KNB Grand Prix #2", type: "Competition", start: "2025-11-01", time: "All day", location: "Moncton, NB" },
     { id: "kc-regional-2025-11-02", title: "Karate Canada Regional Camp", type: "Special", start: "2025-11-02", time: "All day", location: "Moncton, NB" },
 
     { id: "parent-info-2025-11-16", title: "Parent Information Session (in‑person/virtual)", type: "Special", start: "2025-11-16", time: "Evening", location: "Saint John, NB" },
-    { id: "knb-open-2025-11-23", title: "KNB Open Development Training #2", type: "Training", start: "2025-11-23", time: "Daytime", location: "Saint John, NB" },
+    { id: "knb-open-2025-11-16", title: "KNB Open Development Training #2", type: "Training", start: "2025-11-16", time: "Daytime", location: "Saint John, NB" },
 
-    { id: "kns-gp-2025-11-29", title: "KNS Grand Prix", type: "Competition", start: "2025-11-29", time: "All day", location: "Spryfield, NS" },
+    { id: "kns-gp-2025-11-22", title: "KNS Grand Prix", type: "Competition", start: "2025-11-22", time: "All day", location: "Spryfield, NS" },
 
-    { id: "team-announce-2025-12-13", title: "Senior & Junior Team Selection Announcement", type: "Special", start: "2025-12-13", time: "TBA", location: "N/A" },
     { id: "knb-open-2025-12-14", title: "KNB Open Development Training #3 — Weight Check", type: "Training", start: "2025-12-14", time: "Daytime", location: "Saint John, NB" },
 
     // ——— 2026 ———
     { id: "knb-open-2026-01-18", title: "KNB Open Development Training #4 — Weight Check", type: "Training", start: "2026-01-18", time: "Daytime", location: "Saint John, NB" },
 
-    { id: "kns-gp-2026-02-08", title: "KNS Grand Prix", type: "Competition", start: "2026-02-08", time: "All day", location: "Bridgetown, NS" },
-    { id: "junior-select-announce-2026-02-28", title: "Junior Team Selection Announcement", type: "Special", start: "2026-02-28", time: "TBA", location: "N/A" },
+    { id: "kns-gp-2026-01-31", title: "KNS Grand Prix", type: "Competition", start: "2026-01-31", time: "All day", location: "Bridgetown, NS" },
+    { id: "knb-gp1-2026-02-07", title: "KNB Grand Prix #3", type: "Competition", start: "2027-02-07", time: "All day", location: "Moncton, NB"},
+    { id: "knb-clinic-2026-02-03", title: "KNB Clinic", type: "Training", start: "2026-02-08", time: "9:30 am - 2:00 pm", location: "Moncton, NB" },
 
     { id: "kc-senior-u21-nats-2026-02-16", title: "Karate Canada Senior & U21 National Championships", type: "Competition", start: "2026-02-16", end: "2026-02-20", time: "All day", location: "Halifax, NS" },
 
