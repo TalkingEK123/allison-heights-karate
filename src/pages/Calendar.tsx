@@ -8,7 +8,7 @@ import { EVENTS, type Event, type EventType, ymd } from "@/data/events";
  * Set the calendar week start here:
  * 0 = Sunday (common for Canada), 1 = Monday (ISO 8601)
  */
-const WEEK_START: 0 | 1 = 0;
+const WEEK_START: 0 | 1 = 1;
 
 
 
