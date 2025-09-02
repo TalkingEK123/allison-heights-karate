@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Calendar as DayPicker } from "@/components/ui/calendar";
 import { enCA } from "date-fns/locale";
-import { EVENTS, type Event, type EventType, ymd } from "@/data/events";
+import { EVENTS, type Event, type EventType, ymd, toDate } from "@/data/events";
 
 /** ===================== Config =====================
  * Set the calendar week start here:
@@ -10,9 +10,7 @@ import { EVENTS, type Event, type EventType, ymd } from "@/data/events";
  */
 const WEEK_START: 0 | 1 = 1;
 
-
-
-/** High‑contrast colors on dark background */
+/** High-contrast colors on dark background */
 const TYPE_COLOR: Record<EventType, { chip: string; dot: string; label: string }> = {
   Competition: { chip: "bg-[#D7263D] text-white", dot: "bg-[#D7263D]", label: "Competition" }, // crimson
   Training:    { chip: "bg-[#22C55E] text-black", dot: "bg-[#22C55E]", label: "Training" },    // green
@@ -21,16 +19,15 @@ const TYPE_COLOR: Record<EventType, { chip: string; dot: string; label: string }
   Special:     { chip: "bg-[#A855F7] text-white", dot: "bg-[#A855F7]", label: "Special" },     // violet
 };
 
-
-
+/** Enumerate all calendar days between start and end (inclusive), in UTC. */
 const enumerateDates = (startISO: string, endISO?: string) => {
   const out: string[] = [];
-  const start = new Date(startISO);
-  const end = endISO ? new Date(endISO) : new Date(startISO);
+  const start = toDate(startISO);
+  const end = endISO ? toDate(endISO) : start;
   const cur = new Date(start);
   while (cur <= end) {
-    out.push(ymd(cur));
-    cur.setDate(cur.getDate() + 1);
+    out.push(ymd(cur));              // use ymd(Date) — safe
+    cur.setUTCDate(cur.getUTCDate() + 1); // tick calendar day in UTC
   }
   return out;
 };
@@ -47,7 +44,7 @@ export default function Calendar() {
   });
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
-  // Map day -> events (handles multi-day)
+  // Map: "YYYY-MM-DD" -> events on that day (handles multi-day events)
   const eventsByDay = useMemo(() => {
     const map = new Map<string, Event[]>();
     EVENTS.forEach((e) => {
@@ -57,19 +54,20 @@ export default function Calendar() {
         map.set(d, arr);
       });
     });
+    // Stable sort for consistent dot order
     map.forEach((arr) =>
       arr.sort((a, b) => a.type.localeCompare(b.type) || a.title.localeCompare(b.title))
     );
     return map;
   }, []);
 
-  // Filtered upcoming list
+  // Filtered upcoming list (compare in UTC; sort by start date)
   const upcoming = useMemo(() => {
-    const today = new Date(ymd(new Date())); // strip time
+    const today = toDate(ymd(new Date())); // strip to UTC midnight
     return [...EVENTS]
-      .filter((e) => new Date(e.end ?? e.start) >= today)
+      .filter((e) => toDate(e.end ?? e.start) >= today)
       .filter((e) => filters[e.type])
-      .sort((a, b) => +new Date(a.start) - +new Date(b.start));
+      .sort((a, b) => +toDate(a.start) - +toDate(b.start));
   }, [filters]);
 
   // Refs for jumping the list to the selected day
@@ -77,7 +75,7 @@ export default function Calendar() {
   const dayRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   useEffect(() => {
-    const key = selected ? ymd(selected) : undefined;
+    const key = selected ? ymd(selected) : undefined; // ymd(Date) — safe
     if (!key) return;
     const node = dayRefs.current[key];
     if (node) node.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -138,18 +136,9 @@ export default function Calendar() {
 
   return (
     <main id="main" className="bg-brand-900 text-primary">
-      {/* Ensure selected-day dots stay visible */}
-      <style jsx global>{`
-        /* Keep event dots readable when a day is selected or today */
-        .rdp-day_selected .ahk-dot,
-        .rdp-day_today .ahk-dot {
-          box-shadow:
-            inset 0 0 0 2px rgba(255, 255, 255, 0.85),
-            0 0 0 1px rgba(0, 0, 0, 0.6);
-        }
-        /* Slightly stronger weekday/header contrast on dark */
-        .rdp-head_cell { color: rgba(255, 255, 255, 0.92); }
-      `}</style>
+      {/* (Note) The old <style jsx global> block was removed to avoid styled-jsx issues.
+          If you want the selected/today dot outline effect, add the CSS from the
+          comment at the end of this file to your global stylesheet. */}
 
       {/* Header */}
       <header className="section-y border-b border-steel/40">
@@ -182,8 +171,6 @@ export default function Calendar() {
                 showOutsideDays={false}
                 locale={locale}
                 className="rounded-md"
-                /* Bigger & readable on dark; selection uses outline instead of a solid fill
-                   so dots + numbers remain visible with AA contrast */
                 classNames={{
                   months: "flex flex-col sm:flex-row gap-4",
                   caption_label: "text-white text-2xl md:text-3xl font-semibold",
@@ -195,10 +182,8 @@ export default function Calendar() {
                   cell: "p-0",
                   day: "h-16 w-16 md:h-20 md:w-20 text-base md:text-lg text-white/90 hover:bg-white/5 rounded-md focus:outline-none relative",
                   day_outside: "opacity-60",
-                  day_selected:
-                    "ring-2 ring-white/70 bg-white/10 text-white rounded-md", // neutral selection
-                  day_today:
-                    "ring-1 ring-white/50 bg-white/[0.04] rounded-md",
+                  day_selected: "ring-2 ring-white/70 bg-white/10 text-white rounded-md",
+                  day_today: "ring-1 ring-white/50 bg-white/[0.04] rounded-md",
                 }}
                 components={{ DayContent }}
                 modifiers={{ hasAnyEvent }}
@@ -304,11 +289,11 @@ export default function Calendar() {
   );
 }
 
-/** ===================== Pure helpers ===================== */
+/** ===================== Pure helpers (UTC-safe) ===================== */
 function groupByMonth(items: Event[]) {
   const out: { monthLabel: string; items: Event[] }[] = [];
   items.forEach((e) => {
-    const d = new Date(e.start);
+    const d = toDate(e.start);
     const label = d.toLocaleString(undefined, { month: "long", year: "numeric" });
     const bucket = out.find((b) => b.monthLabel === label);
     if (bucket) bucket.items.push(e);
@@ -320,7 +305,7 @@ function groupByMonth(items: Event[]) {
 function groupByDay(items: Event[]) {
   const map = new Map<string, Event[]>();
   items.forEach((e) => {
-    const key = ymd(e.start);
+    const key = e.start; // KEEP the original "YYYY-MM-DD" (don’t call ymd on strings)
     const arr = map.get(key) ?? [];
     arr.push(e);
     map.set(key, arr);
@@ -329,7 +314,7 @@ function groupByDay(items: Event[]) {
     .sort((a, b) => (a[0] < b[0] ? -1 : 1))
     .map(([dayKey, events]) => ({
       dayKey,
-      dayLabel: new Date(dayKey).toLocaleDateString(undefined, {
+      dayLabel: toDate(dayKey).toLocaleDateString(undefined, {
         weekday: "short",
         month: "short",
         day: "numeric",
@@ -339,7 +324,7 @@ function groupByDay(items: Event[]) {
 }
 
 function formatDateRange(e: Event) {
-  const s = new Date(e.start);
+  const s = toDate(e.start);
   if (!e.end) {
     return s.toLocaleDateString(undefined, {
       weekday: "short",
@@ -348,8 +333,8 @@ function formatDateRange(e: Event) {
       year: "numeric",
     });
   }
-  const en = new Date(e.end);
-  const sameMonth = s.getMonth() === en.getMonth() && s.getFullYear() === en.getFullYear();
+  const en = toDate(e.end);
+  const sameMonth = s.getUTCMonth() === en.getUTCMonth() && s.getUTCFullYear() === en.getUTCFullYear();
   if (sameMonth) {
     return `${s.toLocaleDateString(undefined, { month: "short", day: "numeric" })}–${en.toLocaleDateString(undefined, { day: "numeric", year: "numeric" })}`;
   }
