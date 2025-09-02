@@ -147,7 +147,7 @@ export const EVENTS: Event[] = [
       title: "Karate Canada Senior & U21 National Championships", 
       type: "Competition", 
       start: "2026-02-16", 
-      end: "2026-02-20", 
+      end: "2026-02-22", 
       time: "All day", 
       location: "Halifax, NS" },
 
