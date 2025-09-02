@@ -294,7 +294,7 @@ function groupByMonth(items: Event[]) {
   const out: { monthLabel: string; items: Event[] }[] = [];
   items.forEach((e) => {
     const d = toDate(e.start);
-    const label = d.toLocaleString(undefined, { month: "long", year: "numeric" });
+    const label = d.toLocaleString(undefined, { month: "long", year: "numeric", timeZone: "UTC" });
     const bucket = out.find((b) => b.monthLabel === label);
     if (bucket) bucket.items.push(e);
     else out.push({ monthLabel: label, items: [e] });
@@ -305,7 +305,7 @@ function groupByMonth(items: Event[]) {
 function groupByDay(items: Event[]) {
   const map = new Map<string, Event[]>();
   items.forEach((e) => {
-    const key = e.start; // KEEP the original "YYYY-MM-DD" (don’t call ymd on strings)
+    const key = e.start; // keep raw "YYYY-MM-DD"
     const arr = map.get(key) ?? [];
     arr.push(e);
     map.set(key, arr);
@@ -318,6 +318,7 @@ function groupByDay(items: Event[]) {
         weekday: "short",
         month: "short",
         day: "numeric",
+        timeZone: "UTC",
       }),
       events,
     }));
@@ -331,12 +332,13 @@ function formatDateRange(e: Event) {
       month: "short",
       day: "numeric",
       year: "numeric",
+      timeZone: "UTC",
     });
   }
   const en = toDate(e.end);
   const sameMonth = s.getUTCMonth() === en.getUTCMonth() && s.getUTCFullYear() === en.getUTCFullYear();
   if (sameMonth) {
-    return `${s.toLocaleDateString(undefined, { month: "short", day: "numeric" })}–${en.toLocaleDateString(undefined, { day: "numeric", year: "numeric" })}`;
+    return `${s.toLocaleDateString(undefined, { month: "short", day: "numeric", timeZone: "UTC" })}–${en.toLocaleDateString(undefined, { day: "numeric", year: "numeric", timeZone: "UTC" })}`;
   }
-  return `${s.toLocaleDateString(undefined, { month: "short", day: "numeric" })} – ${en.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}`;
+  return `${s.toLocaleDateString(undefined, { month: "short", day: "numeric", timeZone: "UTC" })} – ${en.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })}`;
 }

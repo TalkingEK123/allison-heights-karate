@@ -14,10 +14,10 @@ export type Event = {
 
 // Helper to format YYYY-MM-DD without time (useful elsewhere)
 export const ymd = (d: Date | string) => {
-  const dd = typeof d === "string" ? new Date(d) : d;
-  const y = dd.getFullYear();
-  const m = `${dd.getMonth() + 1}`.padStart(2, "0");
-  const day = `${dd.getDate()}`.padStart(2, "0");
+  if (typeof d === "string") return d; // already "YYYY-MM-DD"
+  const y = d.getUTCFullYear();
+  const m = String(d.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(d.getUTCDate()).padStart(2, "0");
   return `${y}-${m}-${day}`;
 };
 export const toDate = (iso: string) => new Date(`${iso}T00:00:00Z`);
