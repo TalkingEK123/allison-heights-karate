@@ -219,6 +219,9 @@ const BELTS: Record<BeltKey, BeltDetail> = {
       "Kanku Dai",
       "Tekki Shodan",
       "Jion",
+      "Nijushiho",
+      "Kankusho",
+      "Empi",
       "Bassai Dai Bunkai"
     ],
     stances: [
