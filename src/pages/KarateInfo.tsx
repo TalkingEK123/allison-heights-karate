@@ -83,82 +83,182 @@ type BeltKey =
 
 type BeltDetail = {
   name: string;
-  time: string;
+  age: string;
   techniques: string[];
   kata: string[];
   stances: string[];
-  sparring: string;
+  sparring: string[];
   notes?: string[];
 };
 
 const BELTS: Record<BeltKey, BeltDetail> = {
   "white-yellow": {
     name: "White → Yellow",
-    time: "3–4 months",
-    techniques: ["Basic blocks & punches", "Front kick", "Basic combinations"],
-    kata: ["Heian Shodan"],
-    stances: ["Zenkutsu-dachi", "Kiba-dachi"],
-    sparring: "Light contact intro, control first",
+    age: "6",
+    techniques: [
+      "Face Punch: Jodan zuki", 
+      "Stomach Punch: Chudan zuki", 
+      "Rising Block: Jodan uke",
+      "Outside Block: Soto uke",
+      "Inside Block: Uchi uke",
+      "Low Block: Gedan-barai",
+      "Front Kick: Mae-geri"
+    ],
+    kata: [
+      "Taikyoku Shodan", 
+      "Taikyoku Nidan"
+    ],
+    stances: [
+      "Zenkutsu-dachi", 
+      "Kiba-dachi", 
+      "Kokutsu-dachi"
+    ],
+    sparring: ["Introduction of no-contact sparring games"],
   },
   "yellow-orange": {
     name: "Yellow → Orange",
-    time: "4–5 months",
-    techniques: ["Side kick", "Roundhouse", "Knife‑hand strike"],
-    kata: ["Heian Nidan"],
-    stances: ["Kokutsu-dachi", "Zenkutsu-dachi"],
-    sparring: "Controlled contact, basic tactics",
+    age: "7-8",
+    techniques: [
+      "Improved execution of Yellow Belt techniques",
+      "Face Reverse Punch: Jodan gyaku-zuki",
+      "Stomach Punch: Chudan gyaku-zuki",
+      "Knife Hand Block: Shuto uke", 
+      "Side Kick: Yoko geri"
+    ], 
+    kata: [
+      "Heian Shodan",
+      "Heian Nidan"
+    ],
+    stances: ["Improved execution of Yellow Belt stances"],
+    sparring: [
+      "Understanding rules of no-contact kumite",
+      "Basic kumite footwork",
+      "Basic jab mechanics"
+    ],
   },
   "orange-green": {
     name: "Orange → Green",
-    time: "5–6 months",
-    techniques: ["Back kick", "Hook punch", "Elbows"],
+    age: "9-10",
+    techniques: [
+      "Improved execution of Orange Belt techniques",
+      "Roundhouse Kick: Mawashi geri",
+      "Break Fall Techniques", 
+      "Linking multiple techniques in sequence with accuracy and control"
+    ],
     kata: ["Heian Sandan"],
-    stances: ["Fudo-dachi", "Kokutsu-dachi"],
-    sparring: "Free sparring basics",
+    stances: [
+      "Improved execution of Orange Belt stances",
+      "Strong balance"
+    ],
+    sparring: [
+      "No-contact kumite experience",
+      "Basic jab execution",
+      "Basic reverse punch mechanics"
+    ],
   },
   "green-blue": {
     name: "Green → Blue",
-    time: "6–8 months",
-    techniques: ["Advanced combos", "Sweeps/throws (intro)", "Joint control basics"],
-    kata: ["Heian Yondan"],
-    stances: ["Dynamic zenkutsu", "Transitions"],
-    sparring: "Intermediate free sparring",
+    age: "11-12",
+    techniques: [
+      "Improved execution of Green Belt techniques",
+      "Hook Kick: Ura mawashi geri",
+      "Sweeps/throws (intro)",
+      "Knowledge of different counter-timings"
+    ],
+    kata: [
+      "Heian Yondan",
+      "Heian Nidan Bunkai"
+    ],
+    stances: [
+      "Smooth transitions",
+      "Advanced execution of Green Belt stances"
+    ],
+    sparring: [
+      "Intermediate level jab",
+      "Intermediate level reverse punch",
+      "Intermediate level roundhouse kick",
+      "Intermediate level hook kick"
+    ],
+    notes: [
+      "Kumite techniques should demonstrate complete control, with no physical contact."
+    ],
   },
   "blue-brown": {
     name: "Blue → Brown",
-    time: "8–12 months",
-    techniques: ["Advanced kata focus", "Pressure handling", "Counter‑timing"],
-    kata: ["Heian Godan", "Bassai Dai (intro)"],
-    stances: ["Power lines & stability", "Explosive transitions"],
-    sparring: "Advanced strategy & ringcraft",
+    age: "13-14",
+    techniques: [
+      "Strong techniques", 
+      "Advanced stance and technique coordination", 
+      "Fast execution with precision"
+    ],
+    kata: [
+      "Heian Godan",
+      "Bassai Dai",
+      "Heian Sandan Bunkai",
+      "Heian Godan Bunkai"
+    ],
+    stances: [
+      "Nekoashi-dachi",
+      "Explosive transitions"
+    ],
+    sparring: [
+      "Advanced level kumite techniques",
+      "Execution with speed and precision",
+      "Advanced timing"
+    ],
   },
   "brown-black": {
     name: "Brown → Black",
-    time: "12–18 months",
-    techniques: ["Refine everything", "Lead/assist coaching segments", "Testing scenarios"],
-    kata: ["Bassai Dai", "Kanku Dai"],
-    stances: ["Efficiency under fatigue"],
-    sparring: "Expert competition prep",
-    notes: ["Higher technical precision expected", "Video review recommended"],
+    age: "16",
+    techniques: [
+      "Refinement of all previous techniques", 
+      "Lead/assist coaching segments", 
+      "Testing scenarios"
+    ],
+    kata: [ 
+      "Kanku Dai",
+      "Tekki Shodan",
+      "Jion",
+      "Bassai Dai Bunkai"
+    ],
+    stances: [
+      "Efficiency under fatigue",
+      "Elite transitions",
+      "Elite balance"
+    ],
+    sparring: [
+      "Elite level kumite techniques",
+      "Elite distance management",
+      "Advanced kumite strategy"
+    ],
+    notes: [
+      "Higher technical precision expected", 
+      "Great behavior and leadership required"
+    ],
   },
 };
 
+
 const KATA_GEAR = [
-  { item: "Karate Gi", note: "Clean, fitted" },
-  { item: "Belt", note: "Current rank" },
+  { item: "Karate Gi", note: "Clean, Fitted" },
+  { item: "Belt", note: "Red and Blue, Proper length" },
 ];
 
 const KUMITE_GEAR = [
-  { item: "Gloves", note: "WKF‑approved" },
-  { item: "Shin/Instep", note: "WKF‑approved" },
+  { item: "Karate Gi", note: "Clean, Fitted" },
+  { item: "Belt", note: "Red and Blue, Proper length, WKF‑approved"},
+  { item: "Gloves", note: "Red and Blue, WKF‑approved" },
+  { item: "Shin/foot guards", note: "Red and Blue, WKF‑approved" },
+  { item: "Chest Protector", note: "WKF‑approved" },
   { item: "Mouth Guard", note: "Mandatory" },
   { item: "Groin Protection", note: "Mandatory for male athletes" },
-  { item: "Headgear", note: "As applicable" },
+  { item: "Headgear", note: "Mandatory for ages under 14" },
 ];
 
 const DOCS = [
   { name: "Athlete Development Program (Team NB)", href: "/docs/knb-adp-2025-2026.pdf" },
-  { name: "WKF Rules", href: "/docs/wkf-rules.pdf" },
+  { name: "WKF Kumite Rules", href: "https://www.wkf.net/files/pdf/documents/WKF_Kumite_Competition_Rules_2024.pdf" },
+  { name: "WKF Kata Rules", href: "https://www.wkf.net/files/pdf/documents/WKF_Kata_Competition_Rules_2024.pdf" },
   { name: "Photo / Media Consent", href: "/docs/photo-consent.pdf" },
 ];
 
@@ -370,7 +470,7 @@ export default function KarateInfo() {
                         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                           <h3 className="text-2xl md:text-3xl font-semibold text-white">{belt.name}</h3>
                           <span className="rounded-md bg-white/10 px-3 py-1 text-sm text-white/85 ring-1 ring-white/15">
-                            Typical Time: {belt.time}
+                            Minimum age: {belt.age}
                           </span>
                         </div>
 
@@ -387,13 +487,13 @@ export default function KarateInfo() {
                             <h4 className="text-white/90 font-semibold mb-3">Stances</h4>
                             <BulletList items={belt.stances} />
                           </div>
+                          <div>
+                            <h4 className="text-white/90 font-semibold mb-3">Sparring</h4>
+                            <BulletList items={belt.sparring} />
+                          </div>
                         </div>
 
                         <div className="mt-6 grid md:grid-cols-3 gap-6">
-                          <div className="md:col-span-2">
-                            <h4 className="text-white/90 font-semibold mb-3">Sparring Focus</h4>
-                            <p className="text-white/85">{belt.sparring}</p>
-                          </div>
                           {belt.notes && belt.notes.length > 0 && (
                             <div>
                               <h4 className="text-white/90 font-semibold mb-3">Notes</h4>
