@@ -258,9 +258,9 @@ function NewsCarousel() {
                       </span>
                     </div>
                     <div className="p-4 md:p-5">
-                      <p className="text-white/60 text-xs">
+                      {/* <p className="text-white/60 text-xs">
                         {new Date(n.date).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })}
-                      </p>
+                      </p> */}
                       <h3 className="mt-1 text-lg font-semibold text-white">{n.title}</h3>
 
                       {/* Learn more (keeps the whole card as one link; no nested <a>) */}
