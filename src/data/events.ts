@@ -77,14 +77,16 @@ export const EVENTS: Event[] = [
       type: "Competition", 
       start: "2025-11-01", 
       time: "All day", 
-      location: "Moncton, NB" },
+      location: "Moncton, NB",
+      url: "https://www.karatenb.com/events-1/2025-atlantics"},
 
     { id: "kc-regional-2025-11-02", 
       title: "Karate Canada Regional Camp", 
       type: "Special", 
       start: "2025-11-02", 
       time: "All day", 
-      location: "Moncton, NB" },
+      location: "Moncton, NB",
+      url: "https://secure.karatecanada.org/event/regional-national-team-training-camp-atlantic/1009873/"},
 
     { id: "parent-info-2025-11-16", 
       title: "Parent Information Session (in‑person/virtual)", 
